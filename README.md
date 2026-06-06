@@ -140,5 +140,3 @@ As evidências abaixo documentam as principais etapas realizadas na configuraç�
 | VM do SQL Server criada no VirtualBox | ![VM SQL Server](images/01-infraestrutura/vm-sqlserver-virtualbox.png) |
 | Domain Controller configurado no domínio | ![Domain Controller](images/02-active-directory/domain-controller-dominio.png) |
 | Contas de domínio criadas para o ambiente SQL Server | ![Contas de Serviço](images/02-active-directory/contas-servico-sqlserver.png) |
-
-> Endereços IP, senhas e demais informações sensíveis foram omitidos por boas práticas de segurança.
