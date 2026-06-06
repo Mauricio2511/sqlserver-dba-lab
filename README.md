@@ -160,9 +160,19 @@ As evidências abaixo documentam as principais etapas realizadas na configuraç�
 
 > Observação: o diretório de backup foi mantido no mesmo disco da instalação apenas para fins de estudo. Em ambientes produtivos, o ideal é utilizar um disco separado para backups ou uma solução externa, como armazenamento em nuvem.
 
-| Configuração das contas de serviço do SQL Server | ![Contas de Serviço SQL Server](images/03-sql-server/config-contas-servicos.png) |
-| Configuração da collation do Database Engine | ![Collation SQL Server](images/03-sql-server/collation.png) |
-| Configuração de acesso à instância SQL Server | ![Configuração de Acesso](images/03-sql-server/configuracao-acesso.png) |
-| Configuração dos diretórios de dados e logs | ![Configuração de Discos](images/03-sql-server/conf-discos.png) |
-| Configuração do TempDB | ![Configuração TempDB](images/03-sql-server/tempdb.png) |
-| Conexão ao SQL Server via SSMS | ![SSMS Conectado](images/03-sql-server/banco-conectado.png) |
+---
+
+## Evidências
+
+As evidências abaixo documentam as principais etapas realizadas durante a instalação e configuração inicial do SQL Server 2019.
+
+| Etapa | Evidência |
+|---|---|
+| Configuração das contas de serviço do SQL Server | ![Configuração das contas de serviço do SQL Server](images/03-sql-server/config-contas-servicos.png) |
+| Configuração da collation do Database Engine | ![Configuração da collation do Database Engine](images/03-sql-server/collation.png) |
+| Configuração de acesso à instância SQL Server | ![Configuração de acesso à instância SQL Server](images/03-sql-server/configuracao-acesso.png) |
+| Configuração dos diretórios de dados e logs | ![Configuração dos diretórios de dados e logs](images/03-sql-server/conf-discos.png) |
+| Configuração do TempDB | ![Configuração do TempDB](images/03-sql-server/tempdb.png) |
+| Conexão ao SQL Server via SSMS com autenticação do Windows | ![Conexão ao SQL Server via SSMS](images/03-sql-server/banco-conectado.png) |
+
+> Senhas, endereços IP e demais informações sensíveis foram omitidos ou mascarados por boas práticas de segurança.
