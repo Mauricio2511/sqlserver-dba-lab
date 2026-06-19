@@ -295,3 +295,11 @@ Nesta etapa demosntro a diferença entre a remoção de uma permissão e a nega�
 | Remoção da permissão `SELECT` na tabela `Customer2` para o user `dbasql` | ![REVOKE SELECT em Customer2 para dbasql](images/04-seguranca/revoke-select-customer2-dbasql.png) |
 | Teste de acesso à tabela `Customer2` após o `REVOKE` | ![Teste de acesso após o REVOKE](images/04-seguranca/teste-acesso-customer2-apos-revoke.png) |
 | Negação explícita da permissão `SELECT` na tabela `Customer2` para o user `dbasql` | ![DENY SELECT em Customer2 para dbasql](images/04-seguranca/deny-select-customer2-dbasql.png) |
+
+Nesta etapa apliquei uma permissão de leitura em nível de coluna. O usuário `dbasql` recebeu acesso apenas às colunas `Id`, `FirstName` e `LastName` da tabela `dbo.Customer2`. Ao tentar consultar todas as colunas da tabela, o acesso foi negado para as colunas não autorizadas.
+
+| Etapa | Evidência |
+|---|---|
+| Concessão da permissão `SELECT` apenas para colunas específicas da tabela `Customer2` | ![GRANT SELECT em colunas específicas da Customer2](images/04-seguranca/grant-select-colunas-customer2-dbasql.png) |
+| Teste de acesso às colunas permitidas da tabela `Customer2` | ![Teste de acesso às colunas permitidas](images/04-seguranca/teste-acesso-colunas-permitidas-customer2.png) |
+| Teste de acesso a todas as colunas da tabela `Customer2` com permissão negada | ![Teste de acesso negado a todas as colunas](images/04-seguranca/teste-acesso-todas-colunas-customer2-negado.png) |
