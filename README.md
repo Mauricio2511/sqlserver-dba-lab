@@ -303,3 +303,13 @@ Nesta etapa apliquei uma permissão de leitura em nível de coluna. O usuário `
 | Concessão da permissão `SELECT` apenas para colunas específicas da tabela `Customer2` | ![GRANT SELECT em colunas específicas da Customer2](images/04-seguranca/grant-select-colunas-customer2-dbasql.png) |
 | Teste de acesso às colunas permitidas da tabela `Customer2` | ![Teste de acesso às colunas permitidas](images/04-seguranca/teste-acesso-colunas-permitidas-customer2.png) |
 | Teste de acesso a todas as colunas da tabela `Customer2` com permissão negada | ![Teste de acesso negado a todas as colunas](images/04-seguranca/teste-acesso-todas-colunas-customer2-negado.png) |
+
+Nesta etapa mostro o uso de uma role personalizada para administrar permissões no banco de dados. A role `ALLCustomer` recebeu permissões na tabela `dbo.Customer3` e o usuário `dbasql` passou a herdar esses acessos ao ser adicionado como membro da role. Após a remoção do usuário da role, o acesso à tabela deixou de ser permitido.
+
+| Etapa | Evidência |
+|---|---|
+| Criação da role `ALLCustomer` e concessão de permissões na tabela `Customer3` | ![Criação da role e concessão de permissões](images/04-seguranca/criacao-role-allcustomer-permissoes-customer3.png) |
+| Adição do user `dbasql` como membro da role `ALLCustomer` | ![User dbasql adicionado à role](images/04-seguranca/dbasql-adicionado-role-allcustomer.png) |
+| Teste de acesso à tabela `Customer3` através da role | ![Teste de acesso via role](images/04-seguranca/teste-acesso-customer3-via-role.png) |
+| Remoção do user `dbasql` da role `ALLCustomer` | ![User dbasql removido da role](images/04-seguranca/dbasql-removido-role-allcustomer.png) |
+| Teste de acesso à tabela `Customer3` após remoção da role | ![Teste de acesso após remoção da role](images/04-seguranca/teste-acesso-customer3-apos-remocao-role.png) |
