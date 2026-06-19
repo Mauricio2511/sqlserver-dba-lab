@@ -279,5 +279,3 @@ As evidências abaixo documentam a criação do login `dbasql`, o vínculo com o
 | Criação do user `dbasql` no banco CLIENTES | ![Criação do user dbasql no banco CLIENTES](images/04-seguranca/criacao-user-dbasql-clientes.png) |
 | Validação do login `dbasql` na instância | ![Validação do login dbasql](images/04-seguranca/validacao-login-dbasql-instancia.png) |
 | Validação do user `dbasql` no banco CLIENTES | ![Validação do user dbasql](images/04-seguranca/validacao-user-dbasql-clientes.png) |
-
-> Senhas e demais informações sensíveis foram mascaradas ou omitidas por boas práticas de segurança.
