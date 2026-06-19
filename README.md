@@ -280,8 +280,10 @@ As evidências abaixo documentam a criação do login `dbasql`, o vínculo com o
 | Validação do login `dbasql` na instância | ![Validação do login dbasql](images/04-seguranca/validacao-login-dbasql-instancia.png) |
 | Validação do user `dbasql` no banco CLIENTES | ![Validação do user dbasql](images/04-seguranca/validacao-user-dbasql-clientes.png) |
 
-Nesta etapa validei a concessão de permissão mínima em nível de objeto. Inicialmente, o usuário `dbasql` não possuía permissão para consultar a tabela `dbo.Customer2`. Após a execução do comando `GRANT SELECT`, o acesso à tabela foi permitido.
+Nesta etapa foi validada a concessão de permissão mínima em nível de objeto. Inicialmente, o usuário `dbasql` não possuía permissão para consultar a tabela `dbo.Customer2`. Após a execução do comando `GRANT SELECT`, o acesso à tabela foi permitido.
 
+| Etapa | Evidência |
+|---|---|
 | Teste de acesso à tabela `Customer2` antes da permissão | ![Teste de acesso antes do GRANT](images/04-seguranca/teste-acesso-customer2-antes-grant.png) |
 | Concessão da permissão `SELECT` na tabela `Customer2` para o user `dbasql` | ![GRANT SELECT em Customer2 para dbasql](images/04-seguranca/grant-select-customer2-dbasql.png) |
 | Teste de acesso à tabela `Customer2` após a permissão | ![Teste de acesso após o GRANT](images/04-seguranca/teste-acesso-customer2-apos-grant.png) |
