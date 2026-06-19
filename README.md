@@ -176,3 +176,108 @@ As evidências abaixo documentam as principais etapas realizadas durante a insta
 | Conexão ao SQL Server via SSMS com autenticação do Windows | ![Conexão ao SQL Server via SSMS](images/03-sql-server/banco-conectado.png) |
 
 > Senhas, endereços IP e demais informações sensíveis foram omitidos ou mascarados por boas práticas de segurança.
+
+
+---
+
+### 6. Conceitos de Segurança no SQL Server
+
+Nesta etapa estudei conceitos iniciais de segurança no SQL Server, incluindo modos de autenticação, nível de servidor, de banco de dados, permissões em objetos e utilização de schemas.
+
+A segurança no SQL Server pode ser aplicada em diferentes níveis, permitindo controlar o acesso de usuários e grupos conforme a necessidade do ambiente. Esse controle pode ocorrer na instância, no banco de dados, nos objetos do banco ou por meio da organização lógica utilizando schemas.
+
+---
+
+#### Modos de Autenticação
+
+O SQL Server permite dois principais modos de autenticação:
+
+| Modo de Autenticação | Descrição |
+|---|---|
+| Windows Authentication | Utiliza usuários ou grupos do Windows/Active Directory para autenticação. O acesso é criado no Windows e vinculado ao SQL Server por meio de permissões. |
+| SQL Server Authentication | Utiliza logins criados diretamente no SQL Server, como o usuário `sa` ou outros logins SQL. O acesso é gerenciado dentro da própria instância SQL Server. |
+| Mixed Mode | Permite utilizar tanto autenticação do Windows quanto autenticação SQL Server. |
+
+---
+
+#### Segurança em Nível de Servidor
+
+As roles em nível de servidor controlam permissões aplicadas à instância SQL Server como um todo.
+
+| Role | Permissões |
+|---|---|
+| `sysadmin` | Realiza qualquer atividade no SQL Server. A permissão deste papel compreende as permissões de todos os outros papéis. |
+| `securityadmin` | Gerencia os logins. Esta role pode inclusive conseguir se adicionar à role `sysadmin` ou adicionar outro usuário à role `sysadmin`. |
+| `serveradmin` | Pode alterar configurações da instância e executar shutdown na instância. |
+| `diskadmin` | Utilizada basicamente para criar e excluir dispositivos de backup. |
+| `dbcreator` | Cria e altera bancos de dados. |
+| `processadmin` | Tem permissão para executar `KILL` em processos da instância. |
+| `setupadmin` | Tem permissão para gerenciar Linked Servers. |
+| `bulkadmin` | Executa o comando `BULK INSERT`. |
+| `public` | Todo login do SQL Server pertence à role `public`. Essa role permite conectar na instância, visualizar os bancos de dados da instância e executar instruções de `SELECT` no banco `master`. Deve ser utilizada com cuidado, pois permissões indevidas nessa role podem gerar riscos de segurança. |
+
+---
+
+#### Segurança em Nível de Banco de Dados
+
+As roles em nível de banco de dados controlam permissões dentro de um banco específico.
+
+| Role | Permissões |
+|---|---|
+| `db_owner` | Tem poderes totais sobre o banco de dados. |
+| `db_accessadmin` | Pode adicionar e remover usuários no banco de dados. |
+| `db_datareader` | Pode ler dados em todas as tabelas dos bancos de dados dos usuários. |
+| `db_datawriter` | Pode adicionar, alterar ou excluir dados em todas as tabelas de usuário do banco de dados. |
+| `db_ddladmin` | Pode adicionar, modificar ou excluir objetos do banco de dados, como tabelas, por exemplo. |
+| `db_securityadmin` | Pode gerenciar roles e adicionar ou excluir usuários às roles do banco de dados. Também pode gerenciar permissões para objetos do banco de dados. |
+| `db_backupoperator` | Pode realizar backup do banco de dados. |
+| `db_denydatareader` | Não pode consultar dados em nenhuma das tabelas do banco de dados. |
+| `db_denydatawriter` | Não pode alterar dados no banco de dados. |
+
+---
+
+#### Segurança em Nível de Objetos
+
+A segurança em nível de objetos permite controlar permissões específicas em objetos do banco de dados, como:
+
+- Tabelas;
+- Views;
+- Stored Procedures;
+- Functions.
+
+Os principais comandos utilizados para controle de permissões em objetos são:
+
+| Privilégio | Descrição |
+|---|---|
+| `GRANT` | Atribui privilégios de acesso do usuário a objetos do banco de dados. |
+| `REVOKE` | Remove os privilégios de acesso aos objetos obtidos com o comando `GRANT`. |
+| `DENY` | Nega permissão a um usuário ou grupo para realizar operação em um objeto. |
+
+---
+
+#### Schemas no SQL Server
+
+Schemas são coleções de objetos dentro de um banco de dados. Eles ajudam a organizar tabelas, views, procedures, functions e outros objetos de forma lógica.
+
+Exemplo de organização por schema:
+
+```sql
+dbo.Clientes
+financeiro.Pagamentos
+rh.Funcionarios
+```
+---
+
+## Evidências
+
+As evidências abaixo documentam a criação do login `dbasql`, o vínculo com o banco `CLIENTES` e a validação por meio de views de sistema.
+
+| Etapa | Evidência |
+|---|---|
+| Criação do login `dbasql` com autenticação SQL Server | ![Criação do login dbasql](images/04-seguranca/criacao-login-dbasql.png) |
+| Login `dbasql` criado na instância SQL Server | ![Login dbasql criado na instância](images/04-seguranca/login-dbasql-criado-instancia.png) |
+| Criação do user `dbasql` no banco CLIENTES | ![Criação do user dbasql no banco CLIENTES](images/04-seguranca/criacao-user-dbasql-clientes.png) |
+| Validação do login `dbasql` na instância | ![Validação do login dbasql](images/04-seguranca/validacao-login-dbasql-instancia.png) |
+| Validação do user `dbasql` no banco CLIENTES | ![Validação do user dbasql](images/04-seguranca/validacao-user-dbasql-clientes.png) |
+
+> Senhas e demais informações sensíveis foram mascaradas ou omitidas por boas práticas de segurança.
