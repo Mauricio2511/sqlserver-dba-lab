@@ -287,3 +287,11 @@ Nesta etapa foi validada a concessão de permissão mínima em nível de objeto.
 | Teste de acesso à tabela `Customer2` antes da permissão | ![Teste de acesso antes do GRANT](images/04-seguranca/teste-acesso-customer2-antes-grant.png) |
 | Concessão da permissão `SELECT` na tabela `Customer2` para o user `dbasql` | ![GRANT SELECT em Customer2 para dbasql](images/04-seguranca/grant-select-customer2-dbasql.png) |
 | Teste de acesso à tabela `Customer2` após a permissão | ![Teste de acesso após o GRANT](images/04-seguranca/teste-acesso-customer2-apos-grant.png) |
+
+Nesta etapa demosntro a diferença entre a remoção de uma permissão e a negação explícita de acesso. Após remover a permissão `SELECT` do usuário `dbasql`, o acesso à tabela `dbo.Customer2` deixou de ser permitido. Em seguida, apliquei uma negação explícita, reforçando o bloqueio de acesso ao objeto.
+
+| Etapa | Evidência |
+|---|---|
+| Remoção da permissão `SELECT` na tabela `Customer2` para o user `dbasql` | ![REVOKE SELECT em Customer2 para dbasql](images/04-seguranca/revoke-select-customer2-dbasql.png) |
+| Teste de acesso à tabela `Customer2` após o `REVOKE` | ![Teste de acesso após o REVOKE](images/04-seguranca/teste-acesso-customer2-apos-revoke.png) |
+| Negação explícita da permissão `SELECT` na tabela `Customer2` para o user `dbasql` | ![DENY SELECT em Customer2 para dbasql](images/04-seguranca/deny-select-customer2-dbasql.png) |
