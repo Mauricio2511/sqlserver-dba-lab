@@ -339,3 +339,7 @@ Nesta etapa foi realizada a auditoria das permissões do user `DBASQL` no banco 
 | Validação do user `DBASQL` vinculado ao login `dbasql` no banco `TESTESCHEMA` | ![Validação do user DBASQL no banco TESTESCHEMA](images/04-seguranca/validacao-user-dbasql-testschema.png) |
 | Auditoria das permissões do user `DBASQL` no schema `FINANCEIRO` | ![Auditoria das permissões do DBASQL no schema FINANCEIRO](images/04-seguranca/auditoria-permissoes-dbasql-schema-financeiro.png) |
 | Validação de membership do user `DBASQL` sem associação a roles fixas amplas | ![Validação de membership do DBASQL](images/04-seguranca/validacao-membership-dbasql-testschema.png) |
+
+Como boas práticas, entendo que é importante evitar o uso do login `sa` em rotinas administrativas do dia a dia, priorizando contas nomeadas e auditáveis. Quando possível, o ideal é manter o `sa` desabilitado ou renomeado, além de garantir o uso de senha forte caso ele precise permanecer ativo.
+
+Também considero importante revisar periodicamente as permissões concedidas, auditar os acessos dos usuários e priorizar permissões específicas em vez de liberações genéricas. Evitar permissões amplas para usuários comuns, como `db_owner`, ajuda a aplicar o princípio do menor privilégio e manter o ambiente SQL Server mais seguro e controlado.
