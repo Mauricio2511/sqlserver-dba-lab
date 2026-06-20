@@ -313,3 +313,13 @@ Nesta etapa mostro o uso de uma role personalizada para administrar permissões 
 | Teste de acesso à tabela `Customer3` através da role | ![Teste de acesso via role](images/04-seguranca/teste-acesso-customer3-via-role.png) |
 | Remoção do user `dbasql` da role `ALLCustomer` | ![User dbasql removido da role](images/04-seguranca/dbasql-removido-role-allcustomer.png) |
 | Teste de acesso à tabela `Customer3` após remoção da role | ![Teste de acesso após remoção da role](images/04-seguranca/teste-acesso-customer3-apos-remocao-role.png) |
+
+Nesta etapa criei um banco de dados específico para praticar permissões em nível de schema. Dentro desse banco, foram criados os schemas `SALES` e `FINANCEIRO`, além de tabelas associadas a cada schema. O user `dbasql` recebeu permissões apenas no schema `FINANCEIRO`, permitindo o acesso à tabela desse schema e mantendo o acesso negado aos objetos do schema `SALES`.
+
+| Etapa | Evidência |
+|---|---|
+| Criação dos schemas `SALES` e `FINANCEIRO` no banco `TESTESCHEMA` | ![Criação dos schemas SALES e FINANCEIRO](images/04-seguranca/criacao-schemas-sales-financeiro.png) |
+| Criação das tabelas nos schemas `SALES` e `FINANCEIRO` | ![Criação das tabelas nos schemas](images/04-seguranca/criacao-tabelas-sales-financeiro.png) |
+| Concessão das permissões `SELECT` e `INSERT` no schema `FINANCEIRO` para o user `dbasql` | ![GRANT no schema FINANCEIRO para dbasql](images/04-seguranca/grant-select-insert-schema-financeiro-dbasql.png) |
+| Teste de acesso permitido à tabela `FINANCEIRO.PAGAMENTOS` | ![Teste de acesso permitido no schema FINANCEIRO](images/04-seguranca/teste-acesso-schema-financeiro-permitido.png) |
+| Teste de acesso negado à tabela `SALES.VENDAS` | ![Teste de acesso negado no schema SALES](images/04-seguranca/teste-acesso-schema-sales-negado.png) |
