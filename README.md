@@ -323,3 +323,11 @@ Nesta etapa criei um banco de dados específico para praticar permissões em ní
 | Concessão das permissões `SELECT` e `INSERT` no schema `FINANCEIRO` para o user `dbasql` | ![GRANT no schema FINANCEIRO para dbasql](images/04-seguranca/grant-select-insert-schema-financeiro-dbasql.png) |
 | Teste de acesso permitido à tabela `FINANCEIRO.PAGAMENTOS` | ![Teste de acesso permitido no schema FINANCEIRO](images/04-seguranca/teste-acesso-schema-financeiro-permitido.png) |
 | Teste de acesso negado à tabela `SALES.VENDAS` | ![Teste de acesso negado no schema SALES](images/04-seguranca/teste-acesso-schema-sales-negado.png) |
+
+Nesta etapa demonstrei o bloqueio explícito de uma operação em nível de schema. Mesmo com permissão de leitura no schema `FINANCEIRO`, o user `dbasql` teve a operação de insert negada, mantendo o select permitido e bloqueando apenas o cadastro de novos registros.
+
+| Etapa | Evidência |
+|---|---|
+| Negação explícita da permissão `INSERT` no schema `FINANCEIRO` para o user `dbasql` | ![DENY INSERT no schema FINANCEIRO para dbasql](images/04-seguranca/deny-insert-schema-financeiro-dbasql.png) |
+| Teste de consulta permitido na tabela `FINANCEIRO.PAGAMENTOS` após o `DENY INSERT` | ![Teste de SELECT após DENY INSERT](images/04-seguranca/teste-select-schema-financeiro-apos-deny-insert.png) |
+| Teste de inserção negado na tabela `FINANCEIRO.PAGAMENTOS` | ![Teste de INSERT negado no schema FINANCEIRO](images/04-seguranca/teste-insert-schema-financeiro-negado.png) |
