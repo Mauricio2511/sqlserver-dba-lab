@@ -331,3 +331,11 @@ Nesta etapa demonstrei o bloqueio explícito de uma operação em nível de sche
 | Negação explícita da permissão `INSERT` no schema `FINANCEIRO` para o user `dbasql` | ![DENY INSERT no schema FINANCEIRO para dbasql](images/04-seguranca/deny-insert-schema-financeiro-dbasql.png) |
 | Teste de consulta permitido na tabela `FINANCEIRO.PAGAMENTOS` após o `DENY INSERT` | ![Teste de SELECT após DENY INSERT](images/04-seguranca/teste-select-schema-financeiro-apos-deny-insert.png) |
 | Teste de inserção negado na tabela `FINANCEIRO.PAGAMENTOS` | ![Teste de INSERT negado no schema FINANCEIRO](images/04-seguranca/teste-insert-schema-financeiro-negado.png) |
+
+Nesta etapa foi realizada a auditoria das permissões do user `DBASQL` no banco `TESTESCHEMA`. A validação demonstrou que o user está vinculado ao login `dbasql`, não possui associação com roles fixas amplas do banco e possui permissões específicas configuradas no schema `FINANCEIRO`.
+
+| Etapa | Evidência |
+|---|---|
+| Validação do user `DBASQL` vinculado ao login `dbasql` no banco `TESTESCHEMA` | ![Validação do user DBASQL no banco TESTESCHEMA](images/04-seguranca/validacao-user-dbasql-testschema.png) |
+| Auditoria das permissões do user `DBASQL` no schema `FINANCEIRO` | ![Auditoria das permissões do DBASQL no schema FINANCEIRO](images/04-seguranca/auditoria-permissoes-dbasql-schema-financeiro.png) |
+| Validação de membership do user `DBASQL` sem associação a roles fixas amplas | ![Validação de membership do DBASQL](images/04-seguranca/validacao-membership-dbasql-testschema.png) |
