@@ -343,3 +343,48 @@ Nesta etapa foi realizada a auditoria das permissões do user `DBASQL` no banco 
 Como boas práticas, entendo que é importante evitar o uso do login `sa` em rotinas administrativas do dia a dia, priorizando contas nomeadas e auditáveis. Quando possível, o ideal é manter o `sa` desabilitado ou renomeado, além de garantir o uso de senha forte caso ele precise permanecer ativo.
 
 Também considero importante revisar periodicamente as permissões concedidas, auditar os acessos dos usuários e priorizar permissões específicas em vez de liberações genéricas. Evitar permissões amplas para usuários comuns, como `db_owner`, ajuda a aplicar o princípio do menor privilégio e manter o ambiente SQL Server mais seguro e controlado.
+
+## 7. Backup e Restore
+
+Backup e restore são atividades essenciais na rotina de um DBA, pois permitem proteger os dados e recuperar bancos em cenários de falha, exclusão acidental, corrupção ou necessidade de retorno para um ponto anterior.
+
+Neste bloco, criei o banco `BKORES` para ser utilizado ao longo das práticas de backup e restore. A partir dele, realizei testes de alteração de recovery model, geração de backups e simulações de recuperação do banco de dados.
+
+---
+
+### Recovery Model
+
+O recovery model define como o SQL Server registra as transações no log e influencia diretamente as possibilidades de backup e restore.
+
+Durante os estudos, trabalhei com os principais modelos de recuperação:
+
+| Recovery Model | Descrição                                                                                                                                                        |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SIMPLE`       | O log de transações é reutilizado automaticamente, não permitindo backup de log. É mais simples, porém oferece menor possibilidade de recuperação ponto a ponto. |
+| `FULL`         | Mantém o histórico completo das transações no log, permitindo backups de log e maior controle na recuperação do banco.                                           |
+| `BULK_LOGGED`  | Modelo intermediário, usado em operações em massa para reduzir o volume de log gerado, mantendo suporte a backup de log em cenários específicos.                 |
+
+---
+
+### Tipos de Backup
+
+Também pratiquei os principais tipos de backup utilizados no SQL Server:
+
+| Tipo de Backup | Descrição                                                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `FULL`         | Realiza uma cópia completa do banco de dados no momento do backup.                                                              |
+| `DIFERENCIAL`  | Armazena somente as alterações realizadas desde o último backup Full.                                                           |
+| `LOG`          | Registra as transações realizadas no banco, permitindo restaurações mais granulares quando o banco está no recovery model Full. |
+
+---
+
+## Evidências
+
+As evidências abaixo documentam a criação do ambiente de testes, a validação dos recovery models e as primeiras configurações utilizadas para as práticas de backup e restore.
+
+| Etapa | Evidência |
+|---|---|
+| Validação inicial dos recovery models das bases da instância | ![Recovery model inicial](images/05-backup-restore/recovery-model-inicial.png) |
+| Alteração do banco `BKORES` para recovery model `SIMPLE` | ![Recovery model SIMPLE no banco BKORES](images/05-backup-restore/recovery-model-bkores-simple.png) |
+| Alteração do banco `BKORES` para recovery model `FULL` | ![Recovery model FULL no banco BKORES](images/05-backup-restore/recovery-model-bkores-full.png) |
+
