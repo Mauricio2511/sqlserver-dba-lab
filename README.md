@@ -403,3 +403,12 @@ Nesta etapa simulei um cenário de perda do banco `BKORES`, removendo-o da inst�
 | Remoção do banco `BKORES` para simular perda da base | ![Banco BKORES removido da instância](images/05-backup-restore/bkores-removido-instancia.png) |
 | Restore Full do banco `BKORES` executado com sucesso | ![Restore Full do banco BKORES](images/05-backup-restore/restore-full-bkores-sucesso.png) |
 | Validação do banco `BKORES` online e dados recuperados após o restore | ![Validação dos dados após Restore Full](images/05-backup-restore/validacao-dados-bkores-apos-restore-full.png) |
+
+Nesta etapa realizei um backup Full do banco `BKORES` utilizando compressão. A prática permitiu comparar o tamanho do arquivo gerado com o backup Full anterior, demonstrando como a compressão pode reduzir o espaço utilizado para armazenamento dos backups.
+
+IMPORTANTE: Apesar de ser uma prática positiva para economia de espaço em disco, é essencial observar que backups com compressão podem gerar maior consumo de CPU durante a execução. Por isso, em ambientes produtivos, essa configuração deve ser avaliada considerando a capacidade do servidor, o horário de execução dos backups e o impacto na carga de trabalho do banco de dados.
+
+| Etapa | Evidência |
+|---|---|
+| Execução do backup Full com compressão do banco `BKORES` | ![Backup Full com compressão do banco BKORES](images/05-backup-restore/backup-full-compressao-bkores-sucesso.png) |
+| Comparação entre o backup Full normal e o backup Full com compressão | ![Comparação entre backup normal e comprimido](images/05-backup-restore/comparacao-backup-full-normal-compressao.png) |
