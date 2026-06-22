@@ -388,3 +388,11 @@ As evidências abaixo documentam a criação do ambiente de testes, a validaçã
 | Alteração do banco `BKORES` para recovery model `SIMPLE` | ![Recovery model SIMPLE no banco BKORES](images/05-backup-restore/recovery-model-bkores-simple.png) |
 | Alteração do banco `BKORES` para recovery model `FULL` | ![Recovery model FULL no banco BKORES](images/05-backup-restore/recovery-model-bkores-full.png) |
 
+Nesta etapa realizei o primeiro backup Full do banco `BKORES`. O arquivo foi armazenado em um disco dedicado para backups, seguindo a boa prática de separar arquivos de backup dos arquivos de dados e logs do banco de dados.
+
+| Etapa | Evidência |
+|---|---|
+| Execução do backup Full do banco `BKORES` com sucesso | ![Backup Full do banco BKORES](images/05-backup-restore/backup-full-bkores-sucesso.png) |
+| Arquivo `.bak` gerado na pasta de backup | ![Arquivo de backup Full gerado](images/05-backup-restore/arquivo-backup-full-bkores.png) |
+| Validação do banco `BKORES` disponível após o backup | ![Validação do banco BKORES após backup Full](images/05-backup-restore/validacao-bkores-apos-backup-full.png) |
+
