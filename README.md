@@ -412,3 +412,13 @@ IMPORTANTE: Apesar de ser uma prática positiva para economia de espaço em disc
 |---|---|
 | Execução do backup Full com compressão do banco `BKORES` | ![Backup Full com compressão do banco BKORES](images/05-backup-restore/backup-full-compressao-bkores-sucesso.png) |
 | Comparação entre o backup Full normal e o backup Full com compressão | ![Comparação entre backup normal e comprimido](images/05-backup-restore/comparacao-backup-full-normal-compressao.png) |
+
+Nesta etapa realizei backups de log do banco `BKORES` após novas cargas de dados na tabela de teste. Os arquivos de log foram armazenados em uma pasta separada dos backups Full, facilitando a organização dos arquivos gerados durante a prática.
+
+Em ambientes produtivos, o ideal é separar arquivos de dados, logs e backups em discos ou unidades distintas, considerando organização, desempenho e estratégia de recuperação. Para fins de estudo e prática neste laboratório, utilizei uma pasta separada para os backups de log dentro do disco dedicado a backups.
+
+| Etapa | Evidência |
+|---|---|
+| Execução das cargas de dados e dos backups de log do banco `BKORES` | ![Backups de log do banco BKORES](images/05-backup-restore/backups-log-bkores-sucesso.png) |
+| Validação dos registros por carga na tabela `DADOS` | ![Validação das cargas no banco BKORES](images/05-backup-restore/validacao-cargas-bkores-backup-log.png) |
+| Arquivos de backup de log gerados na pasta `BACKUP-LOG` | ![Arquivos de backup de log gerados](images/05-backup-restore/arquivos-backup-log-bkores.png) |
