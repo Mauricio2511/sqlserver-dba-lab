@@ -396,3 +396,10 @@ Nesta etapa realizei o primeiro backup Full do banco `BKORES`. O arquivo foi arm
 | Arquivo `.bak` gerado na pasta de backup | ![Arquivo de backup Full gerado](images/05-backup-restore/arquivo-backup-full-bkores.png) |
 | Validação do banco `BKORES` disponível após o backup | ![Validação do banco BKORES após backup Full](images/05-backup-restore/validacao-bkores-apos-backup-full.png) |
 
+Nesta etapa simulei um cenário de perda do banco `BKORES`, removendo-o da instância e realizando a restauração a partir do backup Full criado anteriormente. Após o restore, foi validado que o banco voltou a ficar online e que os dados da tabela de teste foram recuperados com sucesso.
+
+| Etapa | Evidência |
+|---|---|
+| Remoção do banco `BKORES` para simular perda da base | ![Banco BKORES removido da instância](images/05-backup-restore/bkores-removido-instancia.png) |
+| Restore Full do banco `BKORES` executado com sucesso | ![Restore Full do banco BKORES](images/05-backup-restore/restore-full-bkores-sucesso.png) |
+| Validação do banco `BKORES` online e dados recuperados após o restore | ![Validação dos dados após Restore Full](images/05-backup-restore/validacao-dados-bkores-apos-restore-full.png) |
