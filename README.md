@@ -433,3 +433,14 @@ Em seguida, apliquei o primeiro backup de log também com `NORECOVERY` e finaliz
 | Restore do backup Full com `NORECOVERY` | ![Restore Full com NORECOVERY](images/05-backup-restore/restore-full-bkores-norecovery.png) |
 | Restore dos backups de Log com finalização em `RECOVERY` | ![Restore dos backups de Log](images/05-backup-restore/restore-logs-bkores-sucesso.png) |
 | Validação dos dados após restore Full + Logs | ![Validação após restore Full e Logs](images/05-backup-restore/validacao-bkores-apos-restore-full-logs.png) |
+
+Nesta etapa realizei backups diferenciais do banco `BKORES` a partir de um novo backup Full usado como base. Após esse Full, inseri novas cargas de dados na tabela de teste e gerei backups diferenciais em momentos diferentes, simulando alterações progressivas no banco.
+
+Os arquivos diferenciais foram armazenados em uma pasta separada dos backups Full e dos backups de Log, mantendo a organização dos arquivos utilizados no laboratório. Em ambientes produtivos, essa separação pode ser feita também em discos ou unidades distintas, de acordo com a estratégia de backup, retenção e recuperação definida para o ambiente.
+
+| Etapa | Evidência |
+|---|---|
+| Execução do backup Full base para os backups diferenciais | ![Backup Full base para diferenciais](images/05-backup-restore/backup-full-base-diferencial-bkores.png) |
+| Execução das cargas de dados e dos backups diferenciais do banco `BKORES` | ![Backups diferenciais do banco BKORES](images/05-backup-restore/backups-diferenciais-bkores-sucesso.png) |
+| Validação dos registros por carga na tabela `DADOS` | ![Validação das cargas após backups diferenciais](images/05-backup-restore/validacao-cargas-bkores-backup-diferencial.png) |
+| Arquivos de backup diferencial gerados na pasta `BACKUP-DIFF` | ![Arquivos de backup diferencial gerados](images/05-backup-restore/arquivos-backup-diferencial-bkores.png) |
