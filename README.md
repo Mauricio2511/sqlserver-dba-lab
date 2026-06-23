@@ -422,3 +422,14 @@ Em ambientes produtivos, o ideal é separar arquivos de dados, logs e backups em
 | Execução das cargas de dados e dos backups de log do banco `BKORES` | ![Backups de log do banco BKORES](images/05-backup-restore/backups-log-bkores-sucesso.png) |
 | Validação dos registros por carga na tabela `DADOS` | ![Validação das cargas no banco BKORES](images/05-backup-restore/validacao-cargas-bkores-backup-log.png) |
 | Arquivos de backup de log gerados na pasta `BACKUP-LOG` | ![Arquivos de backup de log gerados](images/05-backup-restore/arquivos-backup-log-bkores.png) |
+
+Nesta etapa simulei a perda do banco `BKORES` e realizei a restauração utilizando uma sequência de backups composta por um backup Full e dois backups de Log. Para isso, restaurei primeiro o backup Full com `NORECOVERY`, mantendo o banco em estado de restauração para receber os backups de log.
+
+Em seguida, apliquei o primeiro backup de log também com `NORECOVERY` e finalizei o processo com o segundo backup de log utilizando `RECOVERY`, permitindo que o banco voltasse a ficar online. Ao final, validei os dados recuperados na tabela de teste, confirmando que as cargas realizadas após o backup Full foram restauradas corretamente.
+
+| Etapa | Evidência |
+|---|---|
+| Remoção do banco `BKORES` para simular perda da base | ![Banco BKORES removido para restore com logs](images/05-backup-restore/bkores-removido-restore-log.png) |
+| Restore do backup Full com `NORECOVERY` | ![Restore Full com NORECOVERY](images/05-backup-restore/restore-full-bkores-norecovery.png) |
+| Restore dos backups de Log com finalização em `RECOVERY` | ![Restore dos backups de Log](images/05-backup-restore/restore-logs-bkores-sucesso.png) |
+| Validação dos dados após restore Full + Logs | ![Validação após restore Full e Logs](images/05-backup-restore/validacao-bkores-apos-restore-full-logs.png) |
