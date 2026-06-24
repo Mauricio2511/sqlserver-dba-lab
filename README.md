@@ -457,3 +457,9 @@ Ao final, validei os dados da tabela de teste, confirmando que as cargas acumula
 | Restore do backup Full base com `NORECOVERY` | ![Restore Full base com NORECOVERY](images/05-backup-restore/restore-full-base-bkores-norecovery.png) |
 | Restore do último backup Diferencial com `RECOVERY` | ![Restore diferencial do banco BKORES](images/05-backup-restore/restore-diferencial-bkores-sucesso.png) |
 | Validação dos dados após restore Full + Diferencial | ![Validação após restore diferencial](images/05-backup-restore/validacao-bkores-apos-restore-diferencial.png) |
+
+Nesta etapa utilizei a leitura de cabeçalho dos backups para consultar informações internas dos arquivos gerados durante as práticas. Foram verificados arquivos de backup Full, Diferencial e Log, permitindo validar informações como banco de origem, tipo de backup, datas, posição do backup no arquivo e LSNs utilizados na cadeia de recuperação.
+
+| Etapa | Evidência |
+|---|---|
+| Leitura dos cabeçalhos dos backups Full, Diferencial e Log do banco `BKORES` | ![Leitura dos cabeçalhos dos backups](images/05-backup-restore/headeronly-backups-bkores.png) |
