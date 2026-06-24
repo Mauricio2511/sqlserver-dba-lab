@@ -444,3 +444,16 @@ Os arquivos diferenciais foram armazenados em uma pasta separada dos backups Ful
 | Execução das cargas de dados e dos backups diferenciais do banco `BKORES` | ![Backups diferenciais do banco BKORES](images/05-backup-restore/backups-diferenciais-bkores-sucesso.png) |
 | Validação dos registros por carga na tabela `DADOS` | ![Validação das cargas após backups diferenciais](images/05-backup-restore/validacao-cargas-bkores-backup-diferencial.png) |
 | Arquivos de backup diferencial gerados na pasta `BACKUP-DIFF` | ![Arquivos de backup diferencial gerados](images/05-backup-restore/arquivos-backup-diferencial-bkores.png) |
+
+Nesta etapa simulei a perda do banco `BKORES` e realizei a restauração utilizando um backup Full base e o último backup Diferencial gerado. O backup Full foi restaurado com `NORECOVERY`, mantendo o banco em estado de restauração para receber o backup diferencial.
+
+Em seguida, restaurei o último backup Diferencial com `RECOVERY`, finalizando o processo e deixando o banco online novamente. Como o backup Diferencial armazena todas as alterações realizadas desde o último backup Full, não foi necessário restaurar os diferenciais anteriores. Nesse cenário, o `BKORES-DIFF3.DIF` já continha as alterações acumuladas dos diferenciais 1 e 2.
+
+Ao final, validei os dados da tabela de teste, confirmando que as cargas acumuladas até o último diferencial foram recuperadas com sucesso.
+
+| Etapa | Evidência |
+|---|---|
+| Remoção do banco `BKORES` para simular perda da base | ![Banco BKORES removido para restore diferencial](images/05-backup-restore/bkores-removido-restore-diferencial.png) |
+| Restore do backup Full base com `NORECOVERY` | ![Restore Full base com NORECOVERY](images/05-backup-restore/restore-full-base-bkores-norecovery.png) |
+| Restore do último backup Diferencial com `RECOVERY` | ![Restore diferencial do banco BKORES](images/05-backup-restore/restore-diferencial-bkores-sucesso.png) |
+| Validação dos dados após restore Full + Diferencial | ![Validação após restore diferencial](images/05-backup-restore/validacao-bkores-apos-restore-diferencial.png) |
