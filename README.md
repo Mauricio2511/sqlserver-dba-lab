@@ -477,3 +477,7 @@ Também realizei o backup do certificado e da chave privada, pois esses arquivos
 | Backup do certificado e da chave privada | ![Backup do certificado e chave privada](images/05-backup-restore/backup-certificado-chave-privada.png) |
 | Execução do backup criptografado do banco `BKORES` | ![Backup criptografado do banco BKORES](images/05-backup-restore/backup-criptografado-bkores-sucesso.png) |
 | Arquivos do backup criptografado, certificado e chave privada gerados | ![Arquivos do backup criptografado](images/05-backup-restore/arquivos-backup-criptografado-bkores.png) |
+
+Ao final deste bloco, pratiquei diferentes estratégias de backup e restore no SQL Server, incluindo backups Full, Diferenciais, de Log, restaurações com `NORECOVERY` e `RECOVERY`, leitura de cabeçalho dos arquivos e backup criptografado com certificado.
+
+As práticas reforçaram a importância de manter uma estratégia organizada de recuperação, separar arquivos de backup dos arquivos de dados e logs, validar os backups gerados e compreender a sequência correta de restauração para reduzir riscos de perda de dados em cenários de falha.
