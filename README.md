@@ -463,3 +463,17 @@ Nesta etapa utilizei a leitura de cabeçalho dos backups para consultar informa�
 | Etapa | Evidência |
 |---|---|
 | Leitura dos cabeçalhos dos backups Full, Diferencial e Log do banco `BKORES` | ![Leitura dos cabeçalhos dos backups](images/05-backup-restore/headeronly-backups-bkores.png) |
+
+Nesta etapa realizei um backup Full criptografado do banco `BKORES`, utilizando uma Master Key e um certificado criados no banco `master`. Essa prática demonstra uma camada adicional de segurança para arquivos de backup, protegendo o conteúdo do `.bak` contra acesso indevido caso o arquivo seja copiado ou exposto fora da instância.
+
+Também realizei o backup do certificado e da chave privada, pois esses arquivos são necessários para possibilitar a restauração do backup criptografado em outro ambiente ou em uma nova instância SQL Server. Sem o certificado e a chave correspondente, o arquivo de backup criptografado pode se tornar inutilizável para restore.
+
+> Observação: a senha exibida nos prints é fictícia e foi utilizada apenas como referência visual para indicar a necessidade de uma senha forte. Durante a criação do certificado e da Master Key, foi utilizada uma senha diferente. Em ambientes reais, senhas devem ser fortes, armazenadas de forma segura e nunca expostas.
+
+| Etapa | Evidência |
+|---|---|
+| Criação da Master Key utilizada para proteger o certificado | ![Criação da Master Key](images/05-backup-restore/criacao-master-key-backup.png) |
+| Criação e validação do certificado `CERTBACKUPSQL` no banco `master` | ![Certificado criado e validado](images/05-backup-restore/certificado-backup-criado-validado.png) |
+| Backup do certificado e da chave privada | ![Backup do certificado e chave privada](images/05-backup-restore/backup-certificado-chave-privada.png) |
+| Execução do backup criptografado do banco `BKORES` | ![Backup criptografado do banco BKORES](images/05-backup-restore/backup-criptografado-bkores-sucesso.png) |
+| Arquivos do backup criptografado, certificado e chave privada gerados | ![Arquivos do backup criptografado](images/05-backup-restore/arquivos-backup-criptografado-bkores.png) |
