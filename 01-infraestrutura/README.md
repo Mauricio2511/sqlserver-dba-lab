@@ -1,24 +1,49 @@
-# Estrutura das Máquinas Virtuais
+# Infraestrutura
+
+## Tecnologias Utilizadas
+
+| Tecnologia | Finalidade |
+|---|---|
+| Oracle VirtualBox | Virtualização do ambiente |
+| Windows Server 2019 | Sistema operacional das VMs |
+| Active Directory | Gerenciamento de domínio, usuários e contas de serviço |
+| DNS Server | Resolução de nomes no ambiente de domínio |
+| SQL Server 2019 | Sistema Gerenciador de Banco de Dados |
+| SQL Server Management Studio | Administração da instância SQL Server |
+
+---
+
+## Arquitetura do Ambiente
+
+O ambiente foi estruturado com duas máquinas virtuais principais:
+
+```text
++-----------------------------+
+| VM01 - DCSRV                |
+| Windows Server 2019         |
+| Active Directory            |
+| DNS Server                  |
+| Domain Controller           |
++-------------+---------------+
+              |
+              | Domínio: companyx.com
+              |
++-------------v---------------+
+| VM02 - DBSRV1               |
+| Windows Server 2019         |
+| SQL Server 2019             |
+| SQL Server Management Studio|
++-----------------------------+
+
+```
+---
+
+## Estrutura das Máquinas Virtuais
 
 | VM | Nome do Servidor | Função |
 |---|---|---|
 | DCVM1 | DCSRV | Domain Controller |
 | DBSRV1 | A definir/configurar | Servidor SQL Server |
-
----
-
-## Domínio
-
-O ambiente foi configurado com domínio próprio para simular uma estrutura corporativa.
-
-| Item | Configuração |
-|---|---|
-| Domínio | companyx.com |
-| Servidor Domain Controller | DCSRV |
-| Sistema Operacional | Windows Server 2019 Datacenter Evaluation |
-| Funções instaladas | Active Directory Domain Services e DNS |
-
-> Por questões de segurança, endereços IP, senhas e demais informações sensíveis não são exibidos neste repositório.
 
 ---
 
@@ -38,10 +63,17 @@ Essa separação simula uma prática comum em ambientes SQL Server, permitindo m
 
 ## Procedimentos Realizados
 
-Infraestrutura Virtual
+### Infraestrutura Virtual
 
 - Criada uma máquina virtual dedicada para atuar como Domain Controller.
 - Criada uma máquina virtual dedicada para instalação do SQL Server.
 - Configurados recursos de hardware virtual, como memória, disco, rede e armazenamento.
 - Configurada rede entre as VMs para comunicação em ambiente de domínio.
 - Configurados discos virtuais separados para sistema operacional, dados e logs do SQL Server.
+
+---
+
+| Etapa | Evidência |
+|---|---|
+| VM do Domain Controller criada no VirtualBox | ![VM Domain Controller](../images/01-infraestrutura/vm-domain-controller-virtualbox.png) |
+| VM do SQL Server criada no VirtualBox | ![VM SQL Server](../images/01-infraestrutura/vm-sqlserver-virtualbox.png) |
