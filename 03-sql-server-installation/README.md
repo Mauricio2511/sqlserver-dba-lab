@@ -1,3 +1,23 @@
+# VM do SQL Server
+
+- Criada uma VM dedicada para o servidor de banco de dados.
+- Instalado o Windows Server 2019.
+- Configurados discos separados para sistema operacional, dados e logs.
+- Preparado o ambiente para ingresso no domínio e instalação do SQL Server 2019.
+
+- ---
+
+## Evidências
+
+As evidências abaixo documentam as principais etapas realizadas na configuração inicial do laboratório.
+
+| Etapa | Evidência |
+|---|---|
+| VM do Domain Controller criada no VirtualBox | ![VM Domain Controller](images/01-infraestrutura/vm-domain-controller-virtualbox.png) |
+| VM do SQL Server criada no VirtualBox | ![VM SQL Server](images/01-infraestrutura/vm-sqlserver-virtualbox.png) |
+| Domain Controller configurado no domínio | ![Domain Controller](images/02-active-directory/domain-controller-dominio.png) |
+| Contas de domínio criadas para o ambiente SQL Server | ![Contas de Serviço](images/02-active-directory/contas-servico-sqlserver.png) |
+
 # Instalação do SQL Server 2019
 
 - Realizada a instalação do SQL Server 2019 na VM dedicada ao servidor de banco de dados.
