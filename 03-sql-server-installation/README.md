@@ -1,24 +1,17 @@
-# VM do SQL Server
+# Instalação do SQL Server 2019
+
+## Procedimentos Realizados
+
+### 4. VM do SQL Server
 
 - Criada uma VM dedicada para o servidor de banco de dados.
 - Instalado o Windows Server 2019.
 - Configurados discos separados para sistema operacional, dados e logs.
 - Preparado o ambiente para ingresso no domínio e instalação do SQL Server 2019.
 
-- ---
+---
 
-## Evidências
-
-As evidências abaixo documentam as principais etapas realizadas na configuração inicial do laboratório.
-
-| Etapa | Evidência |
-|---|---|
-| VM do Domain Controller criada no VirtualBox | ![VM Domain Controller](images/01-infraestrutura/vm-domain-controller-virtualbox.png) |
-| VM do SQL Server criada no VirtualBox | ![VM SQL Server](images/01-infraestrutura/vm-sqlserver-virtualbox.png) |
-| Domain Controller configurado no domínio | ![Domain Controller](images/02-active-directory/domain-controller-dominio.png) |
-| Contas de domínio criadas para o ambiente SQL Server | ![Contas de Serviço](images/02-active-directory/contas-servico-sqlserver.png) |
-
-# Instalação do SQL Server 2019
+### 5. Instalação do SQL Server 2019
 
 - Realizada a instalação do SQL Server 2019 na VM dedicada ao servidor de banco de dados.
 - Configurado o SQL Server Database Engine durante o processo de instalação.
@@ -43,11 +36,11 @@ As evidências abaixo documentam as principais etapas realizadas durante a insta
 
 | Etapa | Evidência |
 |---|---|
-| Configuração das contas de serviço do SQL Server | ![Configuração das contas de serviço do SQL Server](images/03-sql-server/config-contas-servicos.png) |
-| Configuração da collation do Database Engine | ![Configuração da collation do Database Engine](images/03-sql-server/collation.png) |
-| Configuração de acesso à instância SQL Server | ![Configuração de acesso à instância SQL Server](images/03-sql-server/configuracao-acesso.png) |
-| Configuração dos diretórios de dados e logs | ![Configuração dos diretórios de dados e logs](images/03-sql-server/conf-discos.png) |
-| Configuração do TempDB | ![Configuração do TempDB](images/03-sql-server/tempdb.png) |
-| Conexão ao SQL Server via SSMS com autenticação do Windows | ![Conexão ao SQL Server via SSMS](images/03-sql-server/banco-conectado.png) |
+| Configuração das contas de serviço do SQL Server | ![Configuração das contas de serviço do SQL Server](../images/03-sql-server/config-contas-servicos.png) |
+| Configuração da collation do Database Engine | ![Configuração da collation do Database Engine](../images/03-sql-server/collation.png) |
+| Configuração de acesso à instância SQL Server | ![Configuração de acesso à instância SQL Server](../images/03-sql-server/configuracao-acesso.png) |
+| Configuração dos diretórios de dados e logs | ![Configuração dos diretórios de dados e logs](../images/03-sql-server/conf-discos.png) |
+| Configuração do TempDB | ![Configuração do TempDB](../images/03-sql-server/tempdb.png) |
+| Conexão ao SQL Server via SSMS com autenticação do Windows | ![Conexão ao SQL Server via SSMS](../images/03-sql-server/banco-conectado.png) |
 
 > Senhas, endereços IP e demais informações sensíveis foram omitidos ou mascarados por boas práticas de segurança.
