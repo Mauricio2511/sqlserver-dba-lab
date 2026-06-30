@@ -1,52 +1,24 @@
 # SQL Server DBA Lab
 
-Laboratório prático de DBA utilizando SQL Server 2019 em ambiente Windows Server 2019 com Active Directory.
+Laboratório prático de DBA utilizando SQL Server 2019 em ambiente Windows Server 2019.
 
 Este projeto tem como objetivo simular um ambiente corporativo para estudo e prática de administração de banco de dados com SQL Server.
 
 ---
 
-## Tecnologias Utilizadas
+## Módulos do Laboratório
 
-| Tecnologia | Finalidade |
-|---|---|
-| Oracle VirtualBox | Virtualização do ambiente |
-| Windows Server 2019 | Sistema operacional das VMs |
-| Active Directory | Gerenciamento de domínio, usuários e contas de serviço |
-| DNS Server | Resolução de nomes no ambiente de domínio |
-| SQL Server 2019 | Sistema Gerenciador de Banco de Dados |
-| SQL Server Management Studio | Administração da instância SQL Server |
-
----
-
-## Arquitetura do Ambiente
-
-O ambiente foi estruturado com duas máquinas virtuais principais:
-
-```text
-+-----------------------------+
-| VM01 - DCSRV                |
-| Windows Server 2019         |
-| Active Directory            |
-| DNS Server                  |
-| Domain Controller           |
-+-------------+---------------+
-              |
-              | Domínio: companyx.com
-              |
-+-------------v---------------+
-| VM02 - DBSRV1               |
-| Windows Server 2019         |
-| SQL Server 2019             |
-| SQL Server Management Studio|
-+-----------------------------+
-
-```
-
-## Módulos atuais do Laboratório
-
-- ✅ [01 - Infraestrutura](01-infraestrutura/)
-- ✅ [02 - Active Directory](02-active-directory/)
-- ✅ [03 - Instalação do SQL Server](03-sql-server-installation/)
-- ✅ [04 - Segurança e Permissões](04-seguranca-permissoes/)
-- ✅ [05 - Backup e Restore](05-backup-restore/)
+| Status | Módulo | Descrição |
+|---|---|---|
+| ✅ | [01 - Infraestrutura](./01-infraestrutura/) | Construção da infraestrutura virtual do laboratório utilizando VirtualBox, criação das máquinas virtuais e organização dos discos. |
+| ✅ | [02 - Active Directory](./02-active-directory/) | Configuração do domínio, Active Directory, DNS e criação das contas utilizadas no ambiente SQL Server. |
+| ✅ | [03 - Instalação do SQL Server](./03-sql-server-installation/) | Preparação da VM do banco de dados, instalação e configuração inicial do SQL Server 2019. |
+| ✅ | [04 - Segurança e Permissões](./04-seguranca-permissoes/) | Conceitos de autenticação, roles, permissões, schemas e boas práticas de segurança. |
+| ✅ | [05 - Backup e Restore](./05-backup-restore/) | Recovery Models, backups Full, Diferenciais, Log, Restore, Compressão e Criptografia. |
+| 🔄 | 06 - SQL Server Agent e Jobs | Em desenvolvimento |
+| 🔄 | 07 - Maintenance Plans | Em desenvolvimento |
+| 🔄 | 08 - Database Mail e Alertas | Em desenvolvimento |
+| 🔄 | 09 - DBCC CHECKDB | Em desenvolvimento |
+| 🔄 | 10 - Monitoramento | Em desenvolvimento |
+| ⬜ | 11 - Performance e Tuning | Planejado |
+| ⬜ | 12 - Alta Disponibilidade | Planejado |
