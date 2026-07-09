@@ -15,7 +15,7 @@ Este projeto tem como objetivo simular um ambiente corporativo para estudo e pr�
 | ✅ | [03 - Instalação do SQL Server](./03-sql-server-installation/) | Preparação da VM do banco de dados, instalação e configuração inicial do SQL Server 2019. |
 | ✅ | [04 - Segurança e Permissões](./04-seguranca-permissoes/) | Conceitos de autenticação, roles, permissões, schemas e boas práticas de segurança. |
 | ✅ | [05 - Backup e Restore](./05-backup-restore/) | Recovery Models, backups Full, Diferenciais, Log, Restore, Compressão e Criptografia. |
-| 🔄 | 06 - SQL Server Agent e Jobs | Em desenvolvimento |
+| ✅ | [06 - SQL Server Agent e Jobs](./06-sql-server-agent-jobs/) | Automação de tarefas administrativas utilizando SQL Server Agent, criação e agendamento de Jobs, Steps e monitoramento das execuções. |
 | 🔄 | 07 - Maintenance Plans | Em desenvolvimento |
 | 🔄 | 08 - Database Mail e Alertas | Em desenvolvimento |
 | 🔄 | 09 - DBCC CHECKDB | Em desenvolvimento |
