@@ -30,7 +30,7 @@ O SQL Server Agent foi iniciado e o Job criado passou a fazer parte da estrutura
 
 | Evidência |
 |-----------|
-| ![](../images/sql-server-agent-expandido.png) |
+| ![](../images/06-sql-server-agent-jobs/sql-server-agent-expandido.png)
 
 ---
 
@@ -40,7 +40,7 @@ Foi criado o Job **DatabaseCheck**, classificado na categoria **Database Mainten
 
 | Evidência |
 |-----------|
-| ![](../images/propriedades-job-databasecheck.png) |
+![](../images/06-sql-server-agent-jobs/propriedades-job-databasecheck.png)
 
 ---
 
@@ -50,7 +50,7 @@ Foi criado o Step **CheckDatabase**, responsável por executar o comando **DBCC 
 
 | Evidência |
 |-----------|
-| ![](../images/step-job-databasecheck.png) |
+![](../images/06-sql-server-agent-jobs/step-job-databasecheck.png)
 
 ---
 
@@ -60,7 +60,7 @@ Foi criado um agendamento recorrente para que o Job seja executado automaticamen
 
 | Evidência |
 |-----------|
-| ![](../images/schedule-job-databasecheck.png) |
+![](../images/06-sql-server-agent-jobs/schedule-job-databasecheck.png)
 
 ---
 
@@ -70,7 +70,7 @@ Após sua criação, o Schedule foi vinculado ao Job **DatabaseCheck**, permitin
 
 | Evidência |
 |-----------|
-| ![](../images/schedule-vinculado-job-databasecheck.png) |
+![](../images/06-sql-server-agent-jobs/schedule-vinculado-job-databasecheck.png)
 
 ---
 
@@ -80,7 +80,7 @@ Antes da primeira execução agendada, o Job foi executado manualmente para vali
 
 | Evidência |
 |-----------|
-| ![](../images/execucao-manual-job-databasecheck.png) |
+![](../images/06-sql-server-agent-jobs/execucao-manual-job-databasecheck.png)
 
 ---
 
@@ -90,7 +90,7 @@ Após a execução manual, foi consultado o histórico do Job, confirmando que a
 
 | Evidência |
 |-----------|
-| ![](../images/historico-execucao-job-databasecheck.png) |
+![](../images/06-sql-server-agent-jobs/historico-execucao-job-databasecheck.png)
 
 ---
 
