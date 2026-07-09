@@ -4,13 +4,11 @@
 
 O SQL Server Agent é um componente do SQL Server responsável por automatizar tarefas administrativas por meio da criação e execução de Jobs. Esse recurso permite agendar rotinas como backups, verificações de integridade, manutenção de índices e outras atividades essenciais para a administração do ambiente.
 
-Neste laboratório foi criado um Job para executar o comando **DBCC CHECKDB** no banco de dados **CLIENTES**, permitindo compreender a criação, configuração, agendamento e monitoramento de uma rotina automatizada.
+Criei um Job para executar o comando **DBCC CHECKDB** no banco de dados **CLIENTES**, permitindo compreender a criação, configuração, agendamento e monitoramento de uma rotina automatizada.
 
 ---
 
 ## Procedimentos realizados
-
-Durante esta prática foram executadas as seguintes atividades:
 
 - Inicialização e utilização do SQL Server Agent;
 - Criação do Job **DatabaseCheck**;
@@ -97,8 +95,6 @@ Após a execução manual, foi consultado o histórico do Job, confirmando que a
 ---
 
 # Boas práticas
-
-Durante este laboratório foram aplicadas algumas práticas recomendadas para administração do SQL Server:
 
 - Utilizar nomes descritivos para Jobs, Steps e Schedules;
 - Definir um **Owner** estável, como o login `sa`, evitando dependência de contas pessoais;
