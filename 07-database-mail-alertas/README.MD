@@ -2,32 +2,13 @@
 
 ## Objetivo
 
-O Database Mail permite ao SQL Server enviar notificações por e-mail utilizando um servidor SMTP. Esse recurso é amplamente utilizado para alertar administradores sobre falhas em Jobs, eventos críticos e outras rotinas automatizadas executadas pelo SQL Server Agent.
-
-Neste laboratório foi configurado o Database Mail utilizando uma conta SMTP dedicada, criado um Profile para gerenciamento das configurações de envio e realizada a integração com um Operator do SQL Server Agent para notificação automática de falhas no Job **DatabaseCheck**.
-
----
-
-## Procedimentos realizados
-
-Durante esta prática foram executadas as seguintes atividades:
-
-- Configuração de uma conta SMTP para envio de e-mails;
-- Criação do Profile **AlertasDB**;
-- Associação da conta SMTP ao Profile;
-- Envio de e-mail de teste para validação da configuração;
-- Confirmação do recebimento da mensagem;
-- Criação do Operator **dbaalertas**;
-- Configuração do Job **DatabaseCheck** para envio de notificações por e-mail em caso de falha;
-- Execução de um teste de falha controlada para validação do processo de notificação.
-
----
+Nesta etapa configurei o **Database Mail** para permitir o envio de e-mails pelo SQL Server e integrei essa funcionalidade ao **SQL Server Agent**, possibilitando o envio automático de notificações quando um Job apresentar falha.
 
 # Evidências
 
 ## Configuração da conta SMTP
 
-Foi criada uma conta do Database Mail responsável pelo envio das notificações utilizando um servidor SMTP externo.
+Configurei uma conta SMTP utilizando o serviço do Gmail para permitir o envio de notificações pelo Database Mail.
 
 | Evidência |
 |-----------|
@@ -37,7 +18,7 @@ Foi criada uma conta do Database Mail responsável pelo envio das notificações
 
 ## Configuração do Profile
 
-Foi criado o Profile **AlertasDB**, responsável por centralizar as configurações de envio de e-mails e disponibilizar a conta SMTP para utilização pelo SQL Server.
+Criei o Profile **AlertasDB** e associei a conta SMTP configurada anteriormente, permitindo sua utilização pelo SQL Server.
 
 | Evidência |
 |-----------|
@@ -45,9 +26,9 @@ Foi criado o Profile **AlertasDB**, responsável por centralizar as configuraç�
 
 ---
 
-## Envio do e-mail de teste
+## Teste de envio
 
-Após a configuração do Database Mail, foi realizado um envio de teste para validar a comunicação com o servidor SMTP.
+Realizei um teste de envio utilizando o Profile configurado para validar a comunicação com o servidor SMTP.
 
 | Evidência |
 |-----------|
@@ -55,9 +36,9 @@ Após a configuração do Database Mail, foi realizado um envio de teste para va
 
 ---
 
-## Validação do envio
+## Recebimento do e-mail de teste
 
-O recebimento da mensagem confirmou o funcionamento correto da configuração do Database Mail.
+Validei o funcionamento do Database Mail confirmando o recebimento do e-mail enviado durante o teste.
 
 | Evidência |
 |-----------|
@@ -67,11 +48,17 @@ O recebimento da mensagem confirmou o funcionamento correto da configuração do
 
 ## Criação do Operator
 
-Foi criado o Operator **dbaalertas**, responsável por receber notificações enviadas pelo SQL Server Agent.
+Criei o Operator **dbaalertas**, responsável por receber as notificações enviadas pelo SQL Server Agent.
 
 | Evidência |
 |-----------|
 | ![](../images/07-database-mail-alertas/operator-database-mail.png) |
+
+---
+
+## Operator criado
+
+Após a criação, confirmei que o Operator estava disponível para utilização pelo SQL Server Agent.
 
 | Evidência |
 |-----------|
@@ -79,9 +66,9 @@ Foi criado o Operator **dbaalertas**, responsável por receber notificações en
 
 ---
 
-## Configuração das notificações do Job
+## Configuração da notificação do Job
 
-O Job **DatabaseCheck** foi configurado para enviar notificações por e-mail ao Operator sempre que ocorrer uma falha durante sua execução.
+Configurei o Job **DatabaseCheck** para enviar notificações por e-mail ao Operator sempre que ocorrer uma falha durante sua execução.
 
 | Evidência |
 |-----------|
@@ -89,9 +76,9 @@ O Job **DatabaseCheck** foi configurado para enviar notificações por e-mail ao
 
 ---
 
-## Validação da notificação automática
+## Validação da notificação de falha
 
-Para validar a configuração, foi provocada uma falha controlada durante a execução do Job **DatabaseCheck**. O SQL Server Agent enviou automaticamente uma notificação por e-mail ao Operator configurado, confirmando a integração entre Job, Operator e Database Mail.
+Para validar a configuração, provoquei uma falha controlada durante a execução do Job **DatabaseCheck** e confirmei o recebimento automático da notificação por e-mail, comprovando a integração entre SQL Server Agent, Operator e Database Mail.
 
 | Evidência |
 |-----------|
@@ -101,11 +88,11 @@ Para validar a configuração, foi provocada uma falha controlada durante a exec
 
 # Boas práticas
 
-Durante este laboratório foram aplicadas algumas práticas recomendadas para administração do SQL Server:
+Durante esta prática apliquei algumas boas práticas utilizadas na administração do SQL Server:
 
-- Utilizar uma conta dedicada para envio de notificações por e-mail;
-- Centralizar as configurações de envio utilizando Profiles;
-- Configurar Operators para recebimento de notificações administrativas;
-- Configurar notificações de falha para Jobs críticos executados pelo SQL Server Agent;
-- Validar as configurações por meio de testes controlados antes da utilização em ambiente de produção;
-- Priorizar notificações em caso de falha, reduzindo o volume de alertas desnecessários e facilitando o monitoramento operacional.
+- Utilizar um Profile dedicado para envio de notificações administrativas;
+- Centralizar o recebimento de alertas por meio de Operators;
+- Configurar notificações automáticas para Jobs críticos;
+- Validar a configuração realizando testes de envio antes da utilização em produção;
+- Executar testes de falha controlada para garantir que as notificações estejam funcionando corretamente;
+- Priorizar notificações em caso de falha para reduzir o volume de e-mails enviados pelo ambiente.
