@@ -17,3 +17,4 @@ Este projeto tem como objetivo simular um ambiente corporativo para estudo e pr�
 | ✅ | [05 - Backup e Restore](./05-backup-restore/) | Recovery Models, backups Full, Diferenciais, Log, Restore, Compressão e Criptografia. |
 | ✅ | [06 - SQL Server Agent e Jobs](./06-sql-server-agent-jobs/) | Automação de tarefas administrativas utilizando SQL Server Agent, criação e agendamento de Jobs, Steps e monitoramento das execuções. |
 | ✅ | [07 - Database Mail e Alertas](./07-database-mail-alertas/) | Configuração do Database Mail, criação de Operators e envio automático de notificações por e-mail para Jobs do SQL Server Agent. |
+| ✅ | [08 - Maintenance Plans](./08-maintenance-plans/) | Criação de plano de manutenção com verificação de integridade, backups Full, Diferencial e de Log, agendamentos independentes e validação das rotinas pelo SQL Server Agent. |
