@@ -4,9 +4,7 @@
 
 Nesta etapa configurei o **Database Mail** para permitir o envio de e-mails pelo SQL Server e integrei essa funcionalidade ao **SQL Server Agent**, possibilitando o envio automático de notificações quando um Job apresentar falha.
 
-# Evidências
-
-## Configuração da conta SMTP
+# Configuração da conta SMTP
 
 Configurei uma conta SMTP utilizando o serviço do Gmail para permitir o envio de notificações pelo Database Mail.
 
