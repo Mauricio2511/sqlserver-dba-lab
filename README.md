@@ -16,9 +16,4 @@ Este projeto tem como objetivo simular um ambiente corporativo para estudo e pr�
 | ✅ | [04 - Segurança e Permissões](./04-seguranca-permissoes/) | Conceitos de autenticação, roles, permissões, schemas e boas práticas de segurança. |
 | ✅ | [05 - Backup e Restore](./05-backup-restore/) | Recovery Models, backups Full, Diferenciais, Log, Restore, Compressão e Criptografia. |
 | ✅ | [06 - SQL Server Agent e Jobs](./06-sql-server-agent-jobs/) | Automação de tarefas administrativas utilizando SQL Server Agent, criação e agendamento de Jobs, Steps e monitoramento das execuções. |
-| 🔄 | 07 - Maintenance Plans | Em desenvolvimento |
-| 🔄 | 08 - Database Mail e Alertas | Em desenvolvimento |
-| 🔄 | 09 - DBCC CHECKDB | Em desenvolvimento |
-| 🔄 | 10 - Monitoramento | Em desenvolvimento |
-| ⬜ | 11 - Performance e Tuning | Planejado |
-| ⬜ | 12 - Alta Disponibilidade | Planejado |
+| ✅ | [07 - Database Mail e Alertas](./07-database-mail-alertas/) | Configuração do Database Mail, criação de Operators e envio automático de notificações por e-mail para Jobs do SQL Server Agent. |
