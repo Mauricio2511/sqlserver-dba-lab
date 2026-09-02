@@ -40,7 +40,7 @@ Após o crescimento do TempDB, recebi o alerta informando que a utilização dos
 
 Após receber o alerta, identifiquei a sessão responsável pelo consumo de espaço no TempDB.
 
-Analisei as informações da sessão e consultei o último comando executado para confirmar a origem do consumo.
+A sessão identificada foi a **65**, pertencente à minha conexão no SSMS.
 
 ### Evidência
 
@@ -51,6 +51,12 @@ Também analisei a utilização do TempDB durante o incidente para verificar o i
 ### Evidência
 
 ![Utilização do TempDB durante o incidente](../../images/09-monitoramento/tempdb/tempdb-utilizacao-incidente.png)
+
+Para confirmar a operação executada pela sessão 65, utilizei o `DBCC INPUTBUFFER`, que apresentou o `INSERT` responsável pelo preenchimento da tabela temporária.
+
+### Evidência
+
+![Comando executado pela sessão 65](../../images/09-monitoramento/tempdb/tempdb-comando-sessao.png)
 
 ## Tratamento
 
