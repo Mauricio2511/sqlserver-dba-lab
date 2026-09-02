@@ -13,11 +13,7 @@ Realizar práticas de monitoramento e troubleshooting do SQL Server, analisando 
 
 ## Referência
 
-Para a implementação dos alertas utilizados neste laboratório, utilizei como referência o trabalho de **Fabrício Lima**, CEO da **Power Tuning**.
-
-Os alertas utilizados neste ambiente foram baseados nos materiais disponibilizados por Fabrício, enquanto os cenários de monitoramento, testes, investigações e análises apresentados neste laboratório foram realizados por mim em um ambiente próprio de estudos.
-
-Como material complementar, recomendo o curso gratuito **[Criando 40 alertas para monitorar o SQL Server](https://cursos.powertuning.com.br/course/criando-40-alertas-para-monitorar-o-sql-server)**, disponibilizado pela Power Tuning, que apresenta a criação e utilização de diversos alertas para monitoramento de ambientes SQL Server.
+Os alertas implementados no ambiente são do **Fabrício Lima**, CEO da **Power Tuning**, disponibilizados através do curso gratuito **[Criando 40 alertas para monitorar o SQL Server](https://cursos.powertuning.com.br/course/criando-40-alertas-para-monitorar-o-sql-server)**.
 
 ## Monitoramentos
 
