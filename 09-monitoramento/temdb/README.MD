@@ -1,20 +1,18 @@
 # Monitoramento do TempDB
 
-## Objetivo
-
-Realizar um laboratório prático de monitoramento e troubleshooting do TempDB, simulando um cenário de crescimento, identificando a sessão responsável pelo consumo e realizando o tratamento do incidente.
-
 ## Cenário
 
-Foi simulado um crescimento controlado do TempDB através da criação e preenchimento de uma tabela temporária.
+Realizei um laboratório prático de monitoramento e troubleshooting do TempDB, simulando um cenário de crescimento, identificando a sessão responsável pelo consumo e realizando o tratamento do incidente.
 
-O cenário permitiu acompanhar o ciclo completo de um incidente:
+Para isso, simulei um crescimento controlado do TempDB através da criação e preenchimento de uma tabela temporária.
+
+O laboratório me permitiu acompanhar o ciclo completo de um incidente:
 
 **Crescimento → Alerta → Investigação → Tratamento → Validação**
 
 ## Estado inicial
 
-Antes da simulação, foi realizada a análise do tamanho dos arquivos e da utilização do TempDB.
+Antes de iniciar a simulação, analisei o tamanho dos arquivos e a utilização do TempDB.
 
 ### Evidência
 
@@ -24,7 +22,7 @@ Antes da simulação, foi realizada a análise do tamanho dos arquivos e da util
 
 ## Simulação de crescimento
 
-Foi criada e preenchida uma tabela temporária com grande volume de dados para provocar o crescimento controlado do TempDB.
+Criei e preenchi uma tabela temporária com grande volume de dados para provocar o crescimento controlado do TempDB.
 
 ### Evidência
 
@@ -32,7 +30,7 @@ Foi criada e preenchida uma tabela temporária com grande volume de dados para p
 
 ## Alerta
 
-O crescimento do TempDB ultrapassou o limite configurado para o alerta de utilização dos arquivos MDF.
+Após o crescimento do TempDB, recebi o alerta informando que a utilização dos arquivos MDF havia ultrapassado o limite configurado.
 
 ### Evidência
 
@@ -40,17 +38,23 @@ O crescimento do TempDB ultrapassou o limite configurado para o alerta de utiliz
 
 ## Investigação
 
-Após o disparo do alerta, foi identificada a sessão responsável pelo consumo de espaço no TempDB.
+Após receber o alerta, identifiquei a sessão responsável pelo consumo de espaço no TempDB.
 
-A investigação foi realizada utilizando as DMVs de utilização do TempDB, informações da sessão e o último comando executado.
+Analisei as informações da sessão e consultei o último comando executado para confirmar a origem do consumo.
 
 ### Evidência
 
 ![Sessão responsável pelo consumo](../../../../images/09-monitoramento/tempdb/tempdb-sessao-responsavel.png)
 
+Também analisei a utilização do TempDB durante o incidente para verificar o impacto do consumo.
+
+### Evidência
+
+![Utilização do TempDB durante o incidente](../../../../images/09-monitoramento/tempdb/tempdb-utilizacao-incidente.png)
+
 ## Tratamento
 
-Como o consumo foi provocado pela própria sessão de laboratório, a tabela temporária utilizada no teste foi removida, liberando o espaço utilizado no TempDB.
+Como o consumo foi provocado pela minha própria sessão de laboratório, removi a tabela temporária utilizada no teste, liberando o espaço ocupado no TempDB.
 
 ### Evidência
 
@@ -58,17 +62,19 @@ Como o consumo foi provocado pela própria sessão de laboratório, a tabela tem
 
 ## Validação
 
-Após o tratamento, foi validada a utilização do TempDB e confirmado que os arquivos permaneceram com o tamanho físico adquirido durante o crescimento.
+Após o tratamento, validei a utilização do TempDB e confirmei que o espaço utilizado havia sido liberado.
+
+Também verifiquei o tamanho físico dos arquivos e confirmei que eles permaneceram com o tamanho adquirido durante o crescimento.
 
 ### Evidência
 
-![Utilização após tratamento](../../../../images/09-monitoramento/tempdb/tempdb-apos-tratamento.png)
+![Utilização do TempDB após tratamento](../../../../images/09-monitoramento/tempdb/tempdb-apos-tratamento.png)
 
 ![Tamanho dos arquivos após tratamento](../../../../images/09-monitoramento/tempdb/tempdb-tamanho-apos-tratamento.png)
 
 ## Alerta CLEAR
 
-Após a normalização da utilização, o alerta foi executado novamente para validar a recuperação do ambiente.
+Após a normalização da utilização, executei novamente o alerta para validar a recuperação do ambiente e recebi a mensagem de **CLEAR**, confirmando que a condição do alerta havia sido normalizada.
 
 ### Evidência
 
