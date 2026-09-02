@@ -16,9 +16,9 @@ Antes de iniciar a simulação, analisei o tamanho dos arquivos e a utilização
 
 ### Evidência
 
-![Estado inicial do TempDB](../../../../images/09-monitoramento/tempdb/tempdb-estado-inicial.png)
+![Estado inicial do TempDB](../../images/09-monitoramento/tempdb/tempdb-estado-inicial.png)
 
-![Utilização inicial do TempDB](../../../../images/09-monitoramento/tempdb/tempdb-utilizacao-inicial.png)
+![Utilização inicial do TempDB](../../images/09-monitoramento/tempdb/tempdb-utilizacao-inicial.png)
 
 ## Simulação de crescimento
 
@@ -26,7 +26,7 @@ Criei e preenchi uma tabela temporária com grande volume de dados para provocar
 
 ### Evidência
 
-![Crescimento do TempDB](../../../../images/09-monitoramento/tempdb/tempdb-crescimento.png)
+![Crescimento do TempDB](../../images/09-monitoramento/tempdb/tempdb-crescimento.png)
 
 ## Alerta
 
@@ -34,7 +34,7 @@ Após o crescimento do TempDB, recebi o alerta informando que a utilização dos
 
 ### Evidência
 
-![Alerta de crescimento do TempDB](../../../../images/09-monitoramento/tempdb/tempdb-alerta-crescimento.png)
+![Alerta de crescimento do TempDB](../../images/09-monitoramento/tempdb/tempdb-alerta-crescimento.png)
 
 ## Investigação
 
@@ -44,13 +44,13 @@ Analisei as informações da sessão e consultei o último comando executado par
 
 ### Evidência
 
-![Sessão responsável pelo consumo](../../../../images/09-monitoramento/tempdb/tempdb-sessao-responsavel.png)
+![Sessão responsável pelo consumo](../../images/09-monitoramento/tempdb/tempdb-sessao-responsavel.png)
 
 Também analisei a utilização do TempDB durante o incidente para verificar o impacto do consumo.
 
 ### Evidência
 
-![Utilização do TempDB durante o incidente](../../../../images/09-monitoramento/tempdb/tempdb-utilizacao-incidente.png)
+![Utilização do TempDB durante o incidente](../../images/09-monitoramento/tempdb/tempdb-utilizacao-incidente.png)
 
 ## Tratamento
 
@@ -58,19 +58,15 @@ Como o consumo foi provocado pela minha própria sessão de laboratório, removi
 
 ### Evidência
 
-![TempDB após tratamento](../../../../images/09-monitoramento/tempdb/tempdb-apos-tratamento.png)
+![TempDB após tratamento](../../images/09-monitoramento/tempdb/tempdb-apos-tratamento.png)
 
 ## Validação
 
-Após o tratamento, validei a utilização do TempDB e confirmei que o espaço utilizado havia sido liberado.
-
-Também verifiquei o tamanho físico dos arquivos e confirmei que eles permaneceram com o tamanho adquirido durante o crescimento.
+Após o tratamento, verifiquei o tamanho físico dos arquivos e confirmei que eles permaneceram com o tamanho adquirido durante o crescimento.
 
 ### Evidência
 
-![Utilização do TempDB após tratamento](../../../../images/09-monitoramento/tempdb/tempdb-apos-tratamento.png)
-
-![Tamanho dos arquivos após tratamento](../../../../images/09-monitoramento/tempdb/tempdb-tamanho-apos-tratamento.png)
+![Tamanho dos arquivos após tratamento](../../images/09-monitoramento/tempdb/tempdb-tamanho-apos-tratamento.png)
 
 ## Alerta CLEAR
 
@@ -78,7 +74,7 @@ Após a normalização da utilização, executei novamente o alerta para validar
 
 ### Evidência
 
-![Alerta CLEAR do TempDB](../../../../images/09-monitoramento/tempdb/tempdb-alerta-clear.png)
+![Alerta CLEAR do TempDB](../../images/09-monitoramento/tempdb/tempdb-alerta-clear.png)
 
 ## Boas práticas
 
