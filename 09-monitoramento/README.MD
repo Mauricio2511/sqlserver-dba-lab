@@ -15,6 +15,14 @@ Realizar práticas de monitoramento e troubleshooting do SQL Server, analisando 
 
 Os alertas implementados neste ambiente são de autoria de **Fabrício Lima**, CEO da **Power Tuning**, e foram disponibilizados através do curso gratuito **[Criando 40 alertas para monitorar o SQL Server](https://cursos.powertuning.com.br/course/criando-40-alertas-para-monitorar-o-sql-server)**.
 
+## Configuração do alerta
+
+Para este laboratório, utilizei os seguintes parâmetros no alerta de utilização do TempDB:
+
+- **Alerta:** Tempdb MDF File Utilization
+- **Limite de utilização:** 70%
+- **Tamanho mínimo do arquivo:** 100 MB
+
 ## Monitoramentos
 
 | Status | Monitoramento | Descrição |
