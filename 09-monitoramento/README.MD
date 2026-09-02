@@ -5,7 +5,7 @@
 Este laboratório está sendo realizado em uma instância separada do SQL Server, dedicada aos estudos de monitoramento e troubleshooting.
 
 - **SQL Server:** 2025 Developer Edition
-- **SSMS:** SQL Server Management Studio
+- **SSMS:** SQL Server Management Studio 22
 - **Sistema operacional:** Windows 10 Pro
 
 ## Objetivo
