@@ -6,7 +6,6 @@ Este laboratório está sendo realizado em uma instância separada do SQL Server
 
 - **SQL Server:** 2025 Developer Edition
 - **SSMS:** SQL Server Management Studio 22
-- **Sistema operacional:** Windows 10 Pro
 
 ## Objetivo
 
