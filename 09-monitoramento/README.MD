@@ -13,7 +13,7 @@ Realizar práticas de monitoramento e troubleshooting do SQL Server, analisando 
 
 ## Referência
 
-Para a implementação dos alertas utilizados neste laboratório, utilizei como referência o trabalho de **Fabrício Lima**, CEO da **Power Tuning**, profissional com ampla experiência em SQL Server e reconhecido pela comunidade Microsoft como MVP em Data Platform.
+Para a implementação dos alertas utilizados neste laboratório, utilizei como referência o trabalho de **Fabrício Lima**, CEO da **Power Tuning**.
 
 Os alertas utilizados neste ambiente foram baseados nos materiais disponibilizados por Fabrício, enquanto os cenários de monitoramento, testes, investigações e análises apresentados neste laboratório foram realizados por mim em um ambiente próprio de estudos.
 
