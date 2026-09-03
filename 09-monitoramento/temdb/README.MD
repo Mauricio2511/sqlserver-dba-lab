@@ -4,8 +4,6 @@
 
 Neste laboratório, simulei um cenário de crescimento do TempDB para praticar o processo de monitoramento, identificação da sessão responsável pelo consumo, análise da utilização e tratamento do incidente.
 
-O cenário foi executado em um ambiente controlado de estudos.
-
 ### Estado inicial
 
 Inicialmente, analisei o tamanho físico dos arquivos do TempDB.
