@@ -106,7 +106,7 @@ Para este laboratório, os oito arquivos de dados do TempDB estavam configurados
 
 ### Evidência
 
-![Estado inicial do TempDB](../../images/09-monitoramento/tempdb/lab2/tempdb-estado-inicial-kill(2).png)
+![Estado inicial do TempDB](../../images/09-monitoramento/tempdb/lab2/tempdb-estado-inicial-kill%282%29.png)
 
 ### Crescimento natural
 
@@ -118,13 +118,13 @@ Para acompanhar a evolução, utilizei uma consulta baseada no material de Fabr�
 
 ### Evidências
 
-![Crescimento do TempDB - etapa 1](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-01(1).png)
+![Crescimento do TempDB - etapa 1](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-01%281%29.png)
 
-![Crescimento do TempDB - etapa 2](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-02(1).png)
+![Crescimento do TempDB - etapa 2](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-02%281%29.png)
 
-![Crescimento do TempDB - etapa 3](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-03(1).png)
+![Crescimento do TempDB - etapa 3](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-03%281%29.png)
 
-![Crescimento do TempDB - etapa 4](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-04(1).png)
+![Crescimento do TempDB - etapa 4](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-04%281%29.png)
 
 Durante o processo, acompanhei a evolução da utilização dos arquivos e o crescimento automático conforme a necessidade da carga.
 
@@ -138,7 +138,7 @@ A sessão identificada apresentava consumo de TempDB e uma transação aberta, p
 
 ### Evidência
 
-![Sessão identificada pelo sp_whoisactive](../../images/09-monitoramento/tempdb/lab2/tempdb-whoisactive-kill(1).png)
+![Sessão identificada pelo sp_whoisactive](../../images/09-monitoramento/tempdb/lab2/tempdb-whoisactive-kill%281%29.png)
 
 ### Tratamento da sessão
 
@@ -150,7 +150,7 @@ KILL <session_id>;
 
 ### Evidência
 
-![KILL da sessão](../../images/09-monitoramento/tempdb/lab2/tempdb-kill-session(1).png)
+![KILL da sessão](../../images/09-monitoramento/tempdb/lab2/tempdb-kill-session%281%29.png)
 
 ### Liberação do espaço
 
