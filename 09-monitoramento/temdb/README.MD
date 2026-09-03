@@ -90,6 +90,8 @@ Após a normalização da utilização, executei novamente o alerta para validar
 - Não realizar shrink do TempDB automaticamente após todo crescimento.
 - Dimensionar o TempDB de acordo com a carga esperada do ambiente.
 
+---
+
 # Lab 2
 
 ## Cenário
