@@ -104,10 +104,6 @@ O objetivo foi acompanhar o crescimento dos arquivos, identificar a sessão resp
 
 Para este laboratório, os oito arquivos de dados do TempDB estavam configurados com 1 GB cada.
 
-O crescimento automático dos arquivos estava configurado em 64 MB.
-
-O alerta `Tempdb MDF File Utilization` permaneceu habilitado, com limite de utilização de 70% e tamanho mínimo de arquivo de 100 MB.
-
 ### Evidência
 
 ![Estado inicial do TempDB](../../images/09-monitoramento/tempdb/lab2/tempdb-estado-inicial-kill(2).png)
