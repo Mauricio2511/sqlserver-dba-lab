@@ -1,6 +1,4 @@
-# Monitoramento do TempDB
-
-## Lab 1 — Monitoramento e tratamento do crescimento
+## Lab 1
 
 ### Cenário
 
@@ -84,7 +82,7 @@ Como a condição que havia provocado o alerta deixou de existir, o sistema gero
 
 ---
 
-## Lab 2 — Investigação de crescimento e troubleshooting
+## Lab 2
 
 ### Cenário
 
