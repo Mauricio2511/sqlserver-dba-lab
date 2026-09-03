@@ -1,4 +1,4 @@
-# Monitoramento do TempDB
+# Lab 1
 
 ## Cenário
 
@@ -89,3 +89,78 @@ Após a normalização da utilização, executei novamente o alerta para validar
 - Evitar `KILL` ou redução dos arquivos sem compreender a causa do consumo.
 - Não realizar shrink do TempDB automaticamente após todo crescimento.
 - Dimensionar o TempDB de acordo com a carga esperada do ambiente.
+
+## Lab 2 — Investigação de crescimento e troubleshooting
+
+### Cenário
+
+Neste segundo laboratório, simulei um cenário em que uma sessão provoca o crescimento natural do TempDB durante uma operação controlada.
+
+O objetivo foi acompanhar o crescimento dos arquivos, identificar a sessão responsável pelo consumo, realizar o tratamento da sessão e analisar o comportamento do TempDB após a liberação do espaço.
+
+### Configuração inicial
+
+Para este laboratório, os oito arquivos de dados do TempDB foram configurados com 1 GB cada, utilizando crescimento automático de 64 MB.
+
+O alerta `Tempdb MDF File Utilization` permaneceu habilitado, com limite de utilização de 70% e tamanho mínimo de arquivo de 100 MB.
+
+![Estado inicial do TempDB](../../images/09-monitoramento/tempdb/lab2/tempdb-estado-inicial-kill%282%29.png)
+
+### Crescimento natural
+
+Criei uma tabela temporária e iniciei uma transação com inserções sucessivas, permitindo que o TempDB consumisse o espaço disponível e realizasse o crescimento automático dos arquivos conforme a necessidade.
+
+A evolução do crescimento foi acompanhada utilizando uma consulta baseada no material de Fabrício Lima.
+
+![Crescimento do TempDB - etapa 1](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-01%281%29.png)
+
+![Crescimento do TempDB - etapa 2](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-02%281%29.png)
+
+![Crescimento do TempDB - etapa 3](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-03%281%29.png)
+
+![Crescimento do TempDB - etapa 4](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-04%281%29.png)
+
+No último registro, os arquivos de dados atingiram aproximadamente 1,08 GB, demonstrando o autogrowth natural de 64 MB.
+
+### Identificação da sessão
+
+Utilizei o `sp_whoisactive` para identificar a sessão responsável pelo consumo do TempDB.
+
+A sessão identificada apresentava consumo de TempDB e uma transação aberta, permitindo relacionar a atividade ao crescimento observado.
+
+![Sessão identificada pelo sp_whoisactive](../../images/09-monitoramento/tempdb/lab2/tempdb-whoisactive-kill%281%29.png)
+
+### Tratamento da sessão
+
+Após identificar a sessão responsável pelo consumo, utilizei o comando `KILL` para encerrá-la no ambiente de laboratório.
+
+![KILL da sessão](../../images/09-monitoramento/tempdb/lab2/tempdb-kill-session%281%29.png)
+
+### Liberação do espaço
+
+Após o encerramento da sessão, consultei novamente a utilização do TempDB.
+
+O resultado demonstrou que o espaço utilizado pela sessão foi liberado.
+
+![Utilização do TempDB após o KILL](../../images/09-monitoramento/tempdb/lab2/tempdb-apos-kill.png)
+
+### Tamanho físico dos arquivos
+
+Mesmo após a liberação do espaço utilizado, os arquivos de dados permaneceram fisicamente maiores que o tamanho inicial.
+
+Os arquivos estavam em aproximadamente 1,28 GB, enquanto o espaço utilizado internamente já havia sido liberado.
+
+![Tamanho físico após o KILL](../../images/09-monitoramento/tempdb/lab2/tempdb-tamanho-apos-kil.png)
+
+Esse comportamento demonstra a diferença entre liberar espaço dentro do arquivo e reduzir fisicamente o tamanho do arquivo.
+
+### SHRINKFILE
+
+Como parte do experimento, utilizei o `DBCC SHRINKFILE` no arquivo `tempdev`, com o objetivo de reduzi-lo novamente para 1 GB.
+
+```sql
+DBCC SHRINKFILE
+(
+    tempdev,
+    1024
+);
