@@ -18,3 +18,4 @@ Este projeto tem como objetivo simular um ambiente corporativo para estudo e pr�
 | ✅ | [06 - SQL Server Agent e Jobs](./06-sql-server-agent-jobs/) | Automação de tarefas administrativas utilizando SQL Server Agent, criação e agendamento de Jobs, Steps e monitoramento das execuções. |
 | ✅ | [07 - Database Mail e Alertas](./07-database-mail-alertas/) | Configuração do Database Mail, criação de Operators e envio automático de notificações por e-mail para Jobs do SQL Server Agent. |
 | ✅ | [08 - Maintenance Plans](./08-maintenance-plans/) | Criação de plano de manutenção com verificação de integridade, backups Full, Diferencial e de Log, agendamentos independentes e validação das rotinas pelo SQL Server Agent. |
+| ✅ | [09 - Monitoramento](09-monitoramento/) | Monitoramento e troubleshooting do SQL Server, com análise de utilização, identificação de sessões, alertas e tratamento de incidentes. |
