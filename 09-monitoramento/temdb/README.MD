@@ -1,94 +1,88 @@
-# Lab 1
+# Monitoramento do TempDB
 
-## Cenário
+## Lab 1 — Monitoramento e tratamento do crescimento
 
-Realizei um laboratório prático de monitoramento e troubleshooting do TempDB, simulando um cenário de crescimento, identificando a sessão responsável pelo consumo e realizando o tratamento do incidente.
+### Cenário
 
-Para isso, simulei um crescimento controlado do TempDB através da criação e preenchimento de uma tabela temporária.
+Neste laboratório, simulei um cenário de crescimento do TempDB para praticar o processo de monitoramento, identificação da sessão responsável pelo consumo, análise da utilização e tratamento do incidente.
 
-O laboratório me permitiu acompanhar o ciclo completo de um incidente:
+O cenário foi executado em um ambiente controlado de estudos.
 
-**Crescimento → Alerta → Investigação → Tratamento → Validação**
+### Estado inicial
 
-## Estado inicial
+Inicialmente, analisei o tamanho físico dos arquivos do TempDB.
 
-Antes de iniciar a simulação, analisei o tamanho dos arquivos e a utilização do TempDB.
+A instância possuía oito arquivos de dados com 8 MB cada e um arquivo de log com 8 MB.
 
-### Evidência
+![Estado inicial do TempDB](../../images/09-monitoramento/tempdb/lab1/tempdb-estado-inicial.png)
 
-![Estado inicial do TempDB](../../images/09-monitoramento/tempdb/tempdb-estado-inicial.png)
+Também consultei a utilização interna do TempDB para estabelecer uma linha de base antes da simulação.
 
-![Utilização inicial do TempDB](../../images/09-monitoramento/tempdb/tempdb-utilizacao-inicial.png)
+![Utilização inicial do TempDB](../../images/09-monitoramento/tempdb/lab1/tempdb-utilizacao-inicial.png)
 
-## Simulação de crescimento
+### Simulação de crescimento
 
-Criei e preenchi uma tabela temporária com grande volume de dados para provocar o crescimento controlado do TempDB.
+Criei uma tabela temporária e realizei uma inserção controlada de dados para provocar o crescimento do TempDB.
 
-### Evidência
+Após a execução, os arquivos de dados cresceram de 8 MB para aproximadamente 136 MB.
 
-![Crescimento do TempDB](../../images/09-monitoramento/tempdb/tempdb-crescimento.png)
+![Crescimento do TempDB](../../images/09-monitoramento/tempdb/lab1/tempdb-crescimento.png)
 
-## Alerta
+### Alerta
 
-Após o crescimento do TempDB, recebi o alerta informando que a utilização dos arquivos MDF havia ultrapassado o limite configurado.
+Para o laboratório, configurei o alerta de utilização do arquivo MDF do TempDB com limite de 70% de utilização e tamanho mínimo de 100 MB.
 
-### Evidência
+Após o crescimento, o alerta foi disparado indicando que os arquivos de dados haviam ultrapassado o limite configurado.
 
-![Alerta de crescimento do TempDB](../../images/09-monitoramento/tempdb/tempdb-alerta-crescimento.png)
+![Alerta de crescimento do TempDB](../../images/09-monitoramento/tempdb/lab1/tempdb-alerta-crescimento.png)
 
-## Investigação
+### Investigação
 
-Após receber o alerta, identifiquei a sessão responsável pelo consumo de espaço no TempDB.
+Para identificar a sessão responsável pelo consumo do TempDB, consultei a utilização de espaço por sessão.
 
-A sessão identificada foi a **65**, pertencente à minha conexão no SSMS.
+A análise identificou a sessão responsável pela maior parte do consumo de objetos de usuário no TempDB.
 
-### Evidência
+![Sessão responsável pelo consumo](../../images/09-monitoramento/tempdb/lab1/tempdb-sessao-responsavel.png)
 
-![Sessão responsável pelo consumo](../../images/09-monitoramento/tempdb/tempdb-sessao-responsavel.png)
+Em seguida, consultei informações da sessão para identificar o login, computador de origem, aplicação e estado da conexão.
 
-Também analisei a utilização do TempDB durante o incidente para verificar o impacto do consumo.
+Também utilizei o `DBCC INPUTBUFFER` para verificar o último comando executado pela sessão e relacioná-lo ao teste realizado.
 
-### Evidência
+### Análise durante o incidente
 
-![Utilização do TempDB durante o incidente](../../images/09-monitoramento/tempdb/tempdb-utilizacao-incidente.png)
+Depois de identificar a sessão responsável, consultei novamente a utilização interna do TempDB para analisar o consumo durante o incidente.
 
-Para confirmar a operação executada pela sessão 65, utilizei o `DBCC INPUTBUFFER`, que apresentou o `INSERT` responsável pelo preenchimento da tabela temporária.
+![Utilização do TempDB durante o incidente](../../images/09-monitoramento/tempdb/lab1/tempdb-utilizacao-incidente.png)
 
-### Evidência
+### Tratamento
 
-![Comando executado pela sessão 65](../../images/09-monitoramento/tempdb/tempdb-comando-sessao.png)
+Como o consumo estava relacionado à tabela temporária utilizada no teste, realizei a remoção do objeto temporário.
 
-## Tratamento
+```sql
+DROP TABLE #TempDB_Test;
+```
 
-Como o consumo foi provocado pela minha própria sessão de laboratório, removi a tabela temporária utilizada no teste, liberando o espaço ocupado no TempDB.
+Após a remoção, o espaço utilizado pelos objetos temporários foi liberado.
 
-### Evidência
+![TempDB após o tratamento](../../images/09-monitoramento/tempdb/lab1/tempdb-apos-tratamento.png)
 
-![TempDB após tratamento](../../images/09-monitoramento/tempdb/tempdb-apos-tratamento.png)
+### Tamanho físico após o tratamento
 
-## Validação
+Mesmo após a liberação do espaço interno, os arquivos físicos do TempDB permaneceram com o tamanho que haviam atingido durante o crescimento.
 
-Após o tratamento, verifiquei o tamanho físico dos arquivos e confirmei que eles permaneceram com o tamanho adquirido durante o crescimento.
+![Tamanho físico após o tratamento](../../images/09-monitoramento/tempdb/lab1/tempdb-tamanho-apos-tratamento.png)
 
-### Evidência
+Esse comportamento demonstra a diferença entre liberar espaço utilizado dentro do arquivo e reduzir fisicamente o tamanho do arquivo.
 
-![Tamanho dos arquivos após tratamento](../../images/09-monitoramento/tempdb/tempdb-tamanho-apos-tratamento.png)
+### Alerta CLEAR
 
-## Alerta CLEAR
+Após o tratamento, executei novamente a rotina de monitoramento.
 
-Após a normalização da utilização, executei novamente o alerta para validar a recuperação do ambiente e recebi a mensagem de **CLEAR**, confirmando que a condição do alerta havia sido normalizada.
+Como a condição que havia provocado o alerta deixou de existir, o sistema gerou uma mensagem de CLEAR indicando que a utilização dos arquivos do TempDB estava novamente abaixo do limite configurado.
 
-### Evidência
+![Alerta CLEAR do TempDB](../../images/09-monitoramento/tempdb/lab1/tempdb-alerta-clear.png)
 
-![Alerta CLEAR do TempDB](../../images/09-monitoramento/tempdb/tempdb-alerta-clear.png)
-
-## Boas práticas
-
-- Monitorar o crescimento e a utilização do TempDB.
-- Investigar a sessão responsável antes de realizar qualquer intervenção.
-- Evitar `KILL` ou redução dos arquivos sem compreender a causa do consumo.
-- Não realizar shrink do TempDB automaticamente após todo crescimento.
-- Dimensionar o TempDB de acordo com a carga esperada do ambiente.
+---
 
 ## Lab 2 — Investigação de crescimento e troubleshooting
 
@@ -100,7 +94,9 @@ O objetivo foi acompanhar o crescimento dos arquivos, identificar a sessão resp
 
 ### Configuração inicial
 
-Para este laboratório, os oito arquivos de dados do TempDB foram configurados com 1 GB cada, utilizando crescimento automático de 64 MB.
+Para este laboratório, os oito arquivos de dados do TempDB estavam configurados com 1 GB cada.
+
+O crescimento automático dos arquivos estava configurado em 64 MB.
 
 O alerta `Tempdb MDF File Utilization` permaneceu habilitado, com limite de utilização de 70% e tamanho mínimo de arquivo de 100 MB.
 
@@ -108,9 +104,11 @@ O alerta `Tempdb MDF File Utilization` permaneceu habilitado, com limite de util
 
 ### Crescimento natural
 
-Criei uma tabela temporária e iniciei uma transação com inserções sucessivas, permitindo que o TempDB consumisse o espaço disponível e realizasse o crescimento automático dos arquivos conforme a necessidade.
+Criei uma tabela temporária e iniciei uma transação com inserções sucessivas.
 
-A evolução do crescimento foi acompanhada utilizando uma consulta baseada no material de Fabrício Lima.
+A carga foi mantida em execução para permitir o acompanhamento do consumo do TempDB e do crescimento automático dos arquivos.
+
+Para acompanhar a evolução, utilizei uma consulta baseada no material de Fabrício Lima.
 
 ![Crescimento do TempDB - etapa 1](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-01%281%29.png)
 
@@ -120,7 +118,7 @@ A evolução do crescimento foi acompanhada utilizando uma consulta baseada no m
 
 ![Crescimento do TempDB - etapa 4](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-04%281%29.png)
 
-No último registro, os arquivos de dados atingiram aproximadamente 1,08 GB, demonstrando o autogrowth natural de 64 MB.
+Durante o processo, os arquivos atingiram níveis elevados de utilização e o SQL Server realizou o crescimento automático conforme a necessidade.
 
 ### Identificação da sessão
 
@@ -134,6 +132,10 @@ A sessão identificada apresentava consumo de TempDB e uma transação aberta, p
 
 Após identificar a sessão responsável pelo consumo, utilizei o comando `KILL` para encerrá-la no ambiente de laboratório.
 
+```sql
+KILL <session_id>;
+```
+
 ![KILL da sessão](../../images/09-monitoramento/tempdb/lab2/tempdb-kill-session%281%29.png)
 
 ### Liberação do espaço
@@ -146,9 +148,9 @@ O resultado demonstrou que o espaço utilizado pela sessão foi liberado.
 
 ### Tamanho físico dos arquivos
 
-Mesmo após a liberação do espaço utilizado, os arquivos de dados permaneceram fisicamente maiores que o tamanho inicial.
+Mesmo após a liberação do espaço interno, os arquivos de dados permaneceram fisicamente maiores que o tamanho inicial.
 
-Os arquivos estavam em aproximadamente 1,28 GB, enquanto o espaço utilizado internamente já havia sido liberado.
+Os arquivos de dados estavam em aproximadamente 1,28 GB.
 
 ![Tamanho físico após o KILL](../../images/09-monitoramento/tempdb/lab2/tempdb-tamanho-apos-kil.png)
 
@@ -156,11 +158,50 @@ Esse comportamento demonstra a diferença entre liberar espaço dentro do arquiv
 
 ### SHRINKFILE
 
-Como parte do experimento, utilizei o `DBCC SHRINKFILE` no arquivo `tempdev`, com o objetivo de reduzi-lo novamente para 1 GB.
+Como parte do experimento, utilizei o `DBCC SHRINKFILE` no arquivo `tempdev`, com o objetivo de demonstrar a redução física de um arquivo após a liberação do espaço utilizado.
 
 ```sql
+USE tempdb;
+GO
+
 DBCC SHRINKFILE
 (
     tempdev,
     1024
 );
+GO
+```
+
+O arquivo `tempdev` foi reduzido de aproximadamente 1,28 GB para 1 GB.
+
+![Resultado do SHRINKFILE](../../images/09-monitoramento/tempdb/lab2/tempdb-shrink-tempdev.png)
+
+Após a execução, validei novamente o tamanho físico dos arquivos.
+
+![TempDB após o SHRINKFILE](../../images/09-monitoramento/tempdb/lab2/tempdb-apos-shrink.png)
+
+### Restart do SQL Server
+
+Por fim, reiniciei a instância do SQL Server para observar o comportamento do TempDB após sua recriação.
+
+![TempDB após o restart](../../images/09-monitoramento/tempdb/lab2/tempdb-apos-restart.png)
+
+Após o restart, os arquivos de dados foram recriados com 1 GB cada e o arquivo de log voltou para 8 MB.
+
+Também validei novamente a utilização do TempDB.
+
+![Utilização do TempDB após o restart](../../images/09-monitoramento/tempdb/lab2/tempdb-utilizacao-apos-restart.png)
+
+### Observações
+
+As operações de `KILL`, `SHRINKFILE` e restart foram realizadas exclusivamente em ambiente de laboratório, com o objetivo de compreender o comportamento do TempDB durante cenários controlados.
+
+O `KILL` deve ser utilizado somente após a investigação da sessão e avaliação do impacto de seu encerramento. Em ambiente produtivo, o encerramento de uma sessão pode provocar rollback e impactos para a aplicação.
+
+O `SHRINKFILE` não deve ser utilizado como rotina de manutenção para tratar o crescimento recorrente do TempDB. Antes de considerar um shrink, é necessário investigar a causa do crescimento e avaliar se o tamanho atual é necessário para a carga de trabalho.
+
+O fato de o SHRINK ter funcionado neste laboratório não significa que ele será apropriado ou conseguirá reduzir um arquivo em todos os cenários.
+
+Da mesma forma, o restart do SQL Server não deve ser utilizado como mecanismo de tratamento de incidentes relacionados ao crescimento do TempDB em ambiente produtivo, pois provoca indisponibilidade da instância e das aplicações dependentes dela.
+
+Neste laboratório, essas operações foram utilizadas exclusivamente para demonstrar tecnicamente a diferença entre consumo de espaço, liberação de espaço, crescimento automático e redução física dos arquivos.
