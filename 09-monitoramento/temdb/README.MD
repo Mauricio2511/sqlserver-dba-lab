@@ -114,8 +114,6 @@ Criei uma tabela temporária e iniciei uma transação com inserções sucessiva
 
 A carga foi mantida em execução para permitir o acompanhamento do consumo do TempDB e do crescimento automático dos arquivos.
 
-Para acompanhar a evolução, utilizei uma consulta baseada no material de Fabrício Lima.
-
 ### Evidências
 
 ![Crescimento do TempDB - etapa 1](../../images/09-monitoramento/tempdb/lab2/tempdb-crescimento-01.png)
