@@ -142,10 +142,6 @@ A sessão identificada apresentava consumo de TempDB e uma transação aberta, p
 
 Após identificar a sessão responsável pelo consumo, utilizei o comando `KILL` para encerrá-la no ambiente de laboratório.
 
-```sql
-KILL <session_id>;
-```
-
 ### Evidência
 
 ![KILL da sessão](../../images/09-monitoramento/tempdb/lab2/tempdb-kill-session.png)
@@ -175,18 +171,6 @@ Esse comportamento demonstra a diferença entre liberar espaço dentro do arquiv
 ### SHRINKFILE
 
 Como parte do experimento, utilizei o `DBCC SHRINKFILE` no arquivo `tempdev`, com o objetivo de demonstrar a redução física de um arquivo após a liberação do espaço utilizado.
-
-```sql
-USE tempdb;
-GO
-
-DBCC SHRINKFILE
-(
-    tempdev,
-    1024
-);
-GO
-```
 
 O arquivo `tempdev` foi reduzido de aproximadamente 1,28 GB para 1 GB.
 
