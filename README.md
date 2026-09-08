@@ -19,3 +19,4 @@ Este projeto tem como objetivo simular um ambiente corporativo para estudo e pr�
 | ✅ | [07 - Database Mail e Alertas](./07-database-mail-alertas/) | Configuração do Database Mail, criação de Operators e envio automático de notificações por e-mail para Jobs do SQL Server Agent. |
 | ✅ | [08 - Maintenance Plans](./08-maintenance-plans/) | Criação de plano de manutenção com verificação de integridade, backups Full, Diferencial e de Log, agendamentos independentes e validação das rotinas pelo SQL Server Agent. |
 | ✅ | [09 - Monitoramento](09-monitoramento/) | Monitoramento e troubleshooting do SQL Server, com análise de utilização, identificação de sessões, alertas e tratamento de incidentes. |
+| ✅ | [10 - Performance & Tuning](./10-performance-tuning/) | Index Tuning e otimização de consultas no SQL Server, com análise de índices, planos de execução e redução de páginas lidas. |
