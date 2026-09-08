@@ -12,17 +12,15 @@ Durante a prática, utilizei o **SQL Server Management Studio (SSMS)**, análise
 
 ## Etapa 1 - Validação dos índices existentes
 
-Antes de criar um novo índice, comecei verificando os índices que já existiam na tabela `dbo.Badges`. Para esse verificação, basta selecionar o nome da tabela e apertar **ALT + F1**
+Antes de criar um novo índice, comecei verificando os índices que já existiam na tabela `dbo.Badges`. Para essa verificação, basta selecionar o nome da tabela e pressionar **ALT + F1**.
 
 Essa etapa me permitiu verificar quais índices já estavam disponíveis antes de realizar qualquer alteração na tabela.
 
 ### Evidência
 
-**Screenshot para o GitHub:**
-
 `images/10-performance-tuning/validacao-indices-atuais.png`
 
-![Validação dos índices atuais](../images/10-performance-tuning/validacao-indices-atuais.png)
+A imagem apresenta a **validação dos índices existentes atualmente na tabela `dbo.Badges`**.
 
 ---
 
@@ -48,35 +46,25 @@ Utilizei esse resultado como referência para comparar o desempenho após a cria
 
 ### Evidências
 
-**Screenshot para o GitHub:**
-
 `images/10-performance-tuning/plano-de-execucao-previsto-atual.png`
 
-![Plano de execução previsto atual](../images/10-performance-tuning/plano-de-execucao-previsto-atual.png)
-
-**Screenshot para o GitHub:**
+A imagem apresenta o **plano de execução estimado da consulta antes da criação do índice**.
 
 `images/10-performance-tuning/plano-de-execucao-usado-atual.png`
 
-![Plano de execução usado atual](../images/10-performance-tuning/plano-de-execucao-usado-atual.png)
-
-**Screenshot para o GitHub:**
+A imagem apresenta o **plano de execução utilizado na execução da consulta antes da criação do índice**.
 
 `images/10-performance-tuning/detalhes-execucao-previsto-atual.png`
 
-![Detalhes da execução prevista atual](../images/10-performance-tuning/detalhes-execucao-previsto-atual.png)
-
-**Screenshot para o GitHub:**
+A imagem apresenta os **detalhes da execução estimada da consulta antes da criação do índice**.
 
 `images/10-performance-tuning/detalhes-execucao-usado-atual.png`
 
-![Detalhes da execução usada atual](../images/10-performance-tuning/detalhes-execucao-usado-atual.png)
-
-**Screenshot para o GitHub:**
+A imagem apresenta os **detalhes da execução real da consulta antes da criação do índice**.
 
 `images/10-performance-tuning/qtd-paginas-lidas-atual.png`
 
-![Quantidade de páginas lidas atual](../images/10-performance-tuning/qtd-paginas-lidas-atual.png)
+A imagem apresenta a **quantidade de páginas lidas pela consulta antes da criação do índice, totalizando 6.547 páginas**.
 
 ---
 
@@ -84,29 +72,17 @@ Utilizei esse resultado como referência para comparar o desempenho após a cria
 
 Depois da análise, criei um índice não clusterizado na tabela `dbo.Badges`.
 
-Utilizei:
+O índice foi criado utilizando as colunas `Name`, `UserId` e `Date`, considerando a análise de seletividade realizada durante o exercício.
 
-    CREATE NONCLUSTERED INDEX noclus_Badges_name
-    ON dbo.Badges
-    (
-        Name,
-        UserId,
-        Date
-    )
-    WITH (FILLFACTOR = 90);
-    GO
-
-Defini `Name` como a primeira coluna do índice considerando a análise de seletividade realizada durante o exercício.
+Defini `Name` como a primeira coluna do índice considerando a análise realizada.
 
 As demais colunas utilizadas nos filtros também foram adicionadas ao índice para permitir que o SQL Server trabalhasse de forma mais eficiente com as condições da consulta.
 
 ### Evidência
 
-**Screenshot para o GitHub:**
-
 `images/10-performance-tuning/criacao-indice-name.png`
 
-![Criação do índice](../images/10-performance-tuning/criacao-indice-name.png)
+A imagem apresenta a **criação do índice não clusterizado `noclus_Badges_name` na tabela `dbo.Badges`**.
 
 ---
 
@@ -118,11 +94,9 @@ Essa validação também me permitiu comparar a estrutura de índices existente 
 
 ### Evidência
 
-**Screenshot para o GitHub:**
-
 `images/10-performance-tuning/validacao-indices-novo-indice.png`
 
-![Validação dos índices após criação](../images/10-performance-tuning/validacao-indices-novo-indice.png)
+A imagem apresenta a **validação dos índices após a criação do novo índice `noclus_Badges_name`**.
 
 ---
 
@@ -138,23 +112,17 @@ Isso representa uma redução de aproximadamente **98,6% na quantidade de págin
 
 ### Evidências
 
-**Screenshot para o GitHub:**
-
 `images/10-performance-tuning/plano-de-execucao-apos-indice.png`
 
-![Plano de execução após o índice](../images/10-performance-tuning/plano-de-execucao-apos-indice.png)
-
-**Screenshot para o GitHub:**
+A imagem apresenta o **plano de execução após a criação do índice, demonstrando a utilização do Index Seek**.
 
 `images/10-performance-tuning/detalhes-execucao-apos-indice.png`
 
-![Detalhes da execução após o índice](../images/10-performance-tuning/detalhes-execucao-apos-indice.png)
-
-**Screenshot para o GitHub:**
+A imagem apresenta os **detalhes da execução da consulta após a criação do índice**.
 
 `images/10-performance-tuning/qtd-paginas-lidas-apos-indice.png`
 
-![Quantidade de páginas lidas após o índice](../images/10-performance-tuning/qtd-paginas-lidas-apos-indice.png)
+A imagem apresenta a **quantidade de páginas lidas após a criação do índice, totalizando 91 páginas**.
 
 ---
 
