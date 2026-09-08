@@ -78,18 +78,6 @@ Defini `Name` como a primeira coluna do índice considerando a análise realizad
 
 As demais colunas utilizadas nos filtros também foram adicionadas ao índice para permitir que o SQL Server trabalhasse de forma mais eficiente com as condições da consulta.
 
-O índice criado foi:
-
-    CREATE NONCLUSTERED INDEX noclus_Badges_name
-    ON dbo.Badges
-    (
-        Name,
-        UserId,
-        Date
-    )
-    WITH (FILLFACTOR = 90);
-    GO
-
 ### Evidência
 
 ![Criação do índice](../images/10-performance-tuning/criacao-indice-name.png)
