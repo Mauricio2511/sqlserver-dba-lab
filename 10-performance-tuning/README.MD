@@ -1,52 +1,20 @@
-# Indice
+# Performance & Tuning
 
 ## Objetivo
 
-Realizar uma prática de **Index Tuning** no SQL Server, analisando o comportamento de uma consulta antes e depois da criação de um índice.
+Neste módulo, realizei uma prática de **Index Tuning** no SQL Server, analisando o comportamento de uma consulta antes e depois da criação de um índice.
 
-Durante o exercício foram utilizados:
+Utilizei o banco de dados `StackOverflow2010` e a tabela `dbo.Badges`, que possui aproximadamente 1,1 milhão de registros.
 
-- SQL Server
-- SSMS (SQL Server Management Studio)
-- Banco de dados `StackOverflow2010`
-- Tabela `dbo.Badges`
-- `SET STATISTICS IO ON`
-- Plano de execução
-- Análise dos índices existentes
-- Criação de índice não clusterizado
-
-O objetivo foi identificar uma consulta que pudesse se beneficiar de um índice e validar, na prática, a redução da quantidade de páginas lidas pelo SQL Server.
+Durante a prática, utilizei o **SQL Server Management Studio (SSMS)**, análise de índices, plano de execução e `SET STATISTICS IO` para comparar o desempenho da consulta antes e depois da otimização.
 
 ---
 
 ## Etapa 1 - Validação dos índices existentes
 
-Antes da criação de um novo índice, foi realizada a análise dos índices existentes na tabela `dbo.Badges`.
+Antes de criar um novo índice, comecei verificando os índices que já existiam na tabela `dbo.Badges`. Para esse verificação, basta selecionar o nome da tabela e apertar **ALT + F1**
 
-### Comando utilizado
-
-    USE StackOverflow2010;
-    GO
-
-    SELECT
-        i.name AS index_name,
-        i.type_desc,
-        i.is_unique,
-        c.name AS column_name
-    FROM sys.indexes AS i
-    INNER JOIN sys.index_columns AS ic
-        ON i.object_id = ic.object_id
-        AND i.index_id = ic.index_id
-    INNER JOIN sys.columns AS c
-        ON ic.object_id = c.object_id
-        AND ic.column_id = c.column_id
-    WHERE i.object_id = OBJECT_ID('dbo.Badges')
-    ORDER BY
-        i.index_id,
-        ic.key_ordinal;
-    GO
-
-A análise permitiu verificar quais índices já estavam disponíveis antes da criação do novo índice.
+Essa etapa me permitiu verificar quais índices já estavam disponíveis antes de realizar qualquer alteração na tabela.
 
 ### Evidência
 
@@ -60,48 +28,23 @@ A análise permitiu verificar quais índices já estavam disponíveis antes da c
 
 ## Etapa 2 - Análise da consulta
 
-Foi criada uma consulta utilizando filtros sobre as colunas `Name`, `Date` e `UserId`.
+Depois da validação dos índices existentes, montei uma consulta utilizando filtros nas colunas `Name`, `Date` e `UserId`.
 
-### Consulta utilizada
+Analisei as condições utilizadas no `WHERE` para entender quais colunas poderiam contribuir para melhorar a filtragem dos registros.
 
-    USE StackOverflow2010;
-    GO
-
-    SET STATISTICS IO ON;
-    SET STATISTICS TIME ON;
-    GO
-
-    SELECT
-        Id,
-        UserId,
-        Name,
-        Date
-    FROM dbo.Badges
-    WHERE Name = 'Enlightened'
-      AND Date >= '2010-01-01'
-      AND Date < '2011-01-01'
-      AND UserId > 10000;
-    GO
-
-Antes da criação do índice, foram analisadas as condições utilizadas no `WHERE`, buscando entender quais colunas poderiam contribuir para uma melhor filtragem dos registros.
-
-A tabela `dbo.Badges` possui aproximadamente **1,1 milhão de registros**, permitindo observar com clareza o impacto da criação do índice.
+Também realizei uma análise da quantidade de registros retornados pelos filtros para auxiliar na escolha da ordem das colunas do índice.
 
 ---
 
-## Etapa 3 - Execução inicial e análise de desempenho
+## Etapa 3 - Execução inicial
 
-A consulta foi executada antes da criação do índice para obter um cenário inicial e posteriormente comparar os resultados após a otimização.
+Antes de criar o índice, executei a consulta e analisei o plano de execução e as estatísticas de I/O.
 
-O plano de execução inicial apresentou um:
+O plano de execução apresentou um **Clustered Index Scan**.
 
-**Clustered Index Scan**
+Nesse cenário, a consulta realizou **6.547 páginas lidas**.
 
-A consulta realizou:
-
-**6.547 páginas lidas**
-
-Esse resultado foi utilizado como referência para a comparação.
+Utilizei esse resultado como referência para comparar o desempenho após a criação do índice.
 
 ### Evidências
 
@@ -109,39 +52,39 @@ Esse resultado foi utilizado como referência para a comparação.
 
 `images/10-performance-tuning/plano-de-execucao-previsto-atual.png`
 
-![Plano de execução previsto antes do índice](../images/10-performance-tuning/plano-de-execucao-previsto-atual.png)
+![Plano de execução previsto atual](../images/10-performance-tuning/plano-de-execucao-previsto-atual.png)
 
 **Screenshot para o GitHub:**
 
 `images/10-performance-tuning/plano-de-execucao-usado-atual.png`
 
-![Plano de execução utilizado antes do índice](../images/10-performance-tuning/plano-de-execucao-usado-atual.png)
+![Plano de execução usado atual](../images/10-performance-tuning/plano-de-execucao-usado-atual.png)
 
 **Screenshot para o GitHub:**
 
 `images/10-performance-tuning/detalhes-execucao-previsto-atual.png`
 
-![Detalhes da execução prevista antes do índice](../images/10-performance-tuning/detalhes-execucao-previsto-atual.png)
+![Detalhes da execução prevista atual](../images/10-performance-tuning/detalhes-execucao-previsto-atual.png)
 
 **Screenshot para o GitHub:**
 
 `images/10-performance-tuning/detalhes-execucao-usado-atual.png`
 
-![Detalhes da execução utilizada antes do índice](../images/10-performance-tuning/detalhes-execucao-usado-atual.png)
+![Detalhes da execução usada atual](../images/10-performance-tuning/detalhes-execucao-usado-atual.png)
 
 **Screenshot para o GitHub:**
 
 `images/10-performance-tuning/qtd-paginas-lidas-atual.png`
 
-![Quantidade de páginas lidas antes do índice](../images/10-performance-tuning/qtd-paginas-lidas-atual.png)
+![Quantidade de páginas lidas atual](../images/10-performance-tuning/qtd-paginas-lidas-atual.png)
 
 ---
 
 ## Etapa 4 - Criação do índice
 
-Após a análise da consulta, foi criado um índice não clusterizado utilizando as colunas presentes nos filtros da consulta.
+Depois da análise, criei um índice não clusterizado na tabela `dbo.Badges`.
 
-### Índice criado
+Utilizei:
 
     CREATE NONCLUSTERED INDEX noclus_Badges_name
     ON dbo.Badges
@@ -153,9 +96,9 @@ Após a análise da consulta, foi criado um índice não clusterizado utilizando
     WITH (FILLFACTOR = 90);
     GO
 
-A ordem das colunas foi definida considerando a análise realizada durante o exercício.
+Defini `Name` como a primeira coluna do índice considerando a análise de seletividade realizada durante o exercício.
 
-A coluna `Name` foi utilizada como primeira coluna do índice por apresentar maior seletividade para o cenário analisado.
+As demais colunas utilizadas nos filtros também foram adicionadas ao índice para permitir que o SQL Server trabalhasse de forma mais eficiente com as condições da consulta.
 
 ### Evidência
 
@@ -169,9 +112,9 @@ A coluna `Name` foi utilizada como primeira coluna do índice por apresentar mai
 
 ## Etapa 5 - Validação do novo índice
 
-Após a criação, foi realizada uma nova consulta para confirmar que o índice estava disponível na tabela `dbo.Badges`.
+Depois da criação, validei novamente os índices existentes na tabela para confirmar que o novo índice havia sido criado corretamente.
 
-A validação permitiu verificar a presença do novo índice junto aos demais índices da tabela.
+Essa validação também me permitiu comparar a estrutura de índices existente antes e depois da alteração.
 
 ### Evidência
 
@@ -179,27 +122,19 @@ A validação permitiu verificar a presença do novo índice junto aos demais í
 
 `images/10-performance-tuning/validacao-indices-novo-indice.png`
 
-![Validação do novo índice](../images/10-performance-tuning/validacao-indices-novo-indice.png)
+![Validação dos índices após criação](../images/10-performance-tuning/validacao-indices-novo-indice.png)
 
 ---
 
 ## Etapa 6 - Nova execução após a criação do índice
 
-A mesma consulta foi executada novamente após a criação do índice para comparar o comportamento do SQL Server.
+Após criar o índice, executei novamente a mesma consulta para comparar os resultados.
 
-Após a criação do índice, o plano de execução passou a utilizar:
+Dessa vez, o plano de execução passou a utilizar um **Index Seek**.
 
-**Index Seek**
+A quantidade de páginas lidas caiu de **6.547 para 91 páginas**.
 
-A quantidade de páginas lidas caiu de:
-
-**6.547 → 91 páginas**
-
-Isso representa uma redução de aproximadamente:
-
-**98,6%**
-
-na quantidade de páginas lidas pelo SQL Server.
+Isso representa uma redução de aproximadamente **98,6% na quantidade de páginas lidas pelo SQL Server**.
 
 ### Evidências
 
@@ -229,30 +164,38 @@ na quantidade de páginas lidas pelo SQL Server.
 |---|---:|---:|
 | Plano de execução | Clustered Index Scan | Index Seek |
 | Páginas lidas | 6.547 | 91 |
-| Redução | — | ~98,6% |
+| Redução | — | Aproximadamente 98,6% |
 
-A comparação demonstra que o novo índice permitiu ao SQL Server localizar os registros necessários de forma mais eficiente, evitando a leitura de uma grande quantidade de páginas da tabela.
+A comparação mostrou uma diferença significativa no comportamento da consulta após a criação do índice.
+
+A quantidade de páginas que precisaram ser lidas pelo SQL Server passou de **6.547 para apenas 91**.
+
+Além da redução nas leituras, também observei a mudança do operador principal do plano de execução de **Clustered Index Scan** para **Index Seek**.
 
 ---
 
 ## Etapa 7 - Análise do resultado
 
-A criação do índice foi validada por meio de três pontos principais:
+Com essa prática, consegui observar na prática o impacto que um índice pode causar no desempenho de uma consulta.
 
-- mudança do plano de execução de **Clustered Index Scan** para **Index Seek**;
-- redução da quantidade de páginas lidas;
-- utilização do novo índice pela consulta.
+Antes da criação do índice, o SQL Server utilizava um **Clustered Index Scan**, realizando a leitura de uma quantidade muito maior de páginas.
 
-O resultado mostrou, na prática, como a escolha adequada de um índice pode reduzir significativamente o trabalho realizado pelo SQL Server durante a execução de uma consulta.
+Depois da criação do índice, a consulta passou a utilizar um **Index Seek**, reduzindo significativamente a quantidade de páginas lidas.
 
-Também foi possível observar a importância de analisar os índices existentes antes de criar novos índices, evitando a criação desnecessária de estruturas que poderiam não trazer benefício para a consulta.
+Também pude perceber a importância de analisar os índices existentes e as condições utilizadas na consulta antes de criar um novo índice.
+
+A análise não deve considerar apenas a quantidade de valores distintos de uma coluna, mas também o comportamento real dos filtros e a quantidade de registros que cada condição pode retornar.
 
 ---
 
 ## Conclusão
 
-Neste laboratório foi realizada uma prática de **Performance & Tuning** utilizando análise de índices, plano de execução e estatísticas de I/O.
+Neste laboratório, pratiquei **Performance & Tuning** com foco em **Index Tuning**, utilizando o banco `StackOverflow2010` e a tabela `dbo.Badges`.
 
-O principal resultado obtido foi a redução de **6.547 para 91 páginas lidas**, aproximadamente **98,6% de redução**, além da mudança do plano de execução de **Clustered Index Scan** para **Index Seek**.
+Parti de um cenário em que a consulta realizava **6.547 páginas lidas** e apresentava um **Clustered Index Scan**.
 
-A prática permitiu observar diretamente o impacto que um índice pode causar no desempenho de uma consulta e reforçou a importância de analisar o comportamento real da consulta antes e depois da otimização.
+Após analisar a consulta e criar o índice `noclus_Badges_name`, executei novamente a consulta e obtive **91 páginas lidas**, representando uma redução de aproximadamente **98,6%**.
+
+O plano de execução também passou de **Clustered Index Scan** para **Index Seek**.
+
+Esse exercício me ajudou a entender, de forma prática, como a criação e a escolha adequada de um índice podem contribuir para a otimização de consultas no SQL Server.
