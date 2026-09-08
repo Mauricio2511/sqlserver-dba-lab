@@ -50,17 +50,25 @@ Utilizei esse resultado como referência para comparar o desempenho após a cria
 
 A imagem apresenta o **plano de execução estimado da consulta antes da criação do índice**.
 
+---
+
 ![Plano de execução usado atual](../images/10-performance-tuning/plano-de-execucao-usado-atual.png)
 
 A imagem apresenta o **plano de execução utilizado na execução da consulta antes da criação do índice**.
+
+---
 
 ![Detalhes da execução prevista atual](../images/10-performance-tuning/detalhes-execucao-previsto-atual.png)
 
 A imagem apresenta os **detalhes da execução estimada da consulta antes da criação do índice**.
 
+---
+
 ![Detalhes da execução usada atual](../images/10-performance-tuning/detalhes-execucao-usado-atual.png)
 
 A imagem apresenta os **detalhes da execução real da consulta antes da criação do índice**.
+
+---
 
 ![Quantidade de páginas lidas atual](../images/10-performance-tuning/qtd-paginas-lidas-atual.png)
 
@@ -72,9 +80,7 @@ A imagem apresenta a **quantidade de páginas lidas pela consulta antes da cria�
 
 Depois da análise, criei um índice não clusterizado na tabela `dbo.Badges`.
 
-O índice foi criado utilizando as colunas `Name`, `UserId` e `Date`, considerando a análise de seletividade realizada durante o exercício.
-
-Defini `Name` como a primeira coluna do índice considerando a análise realizada.
+Defini `Name` como a primeira coluna do índice considerando a análise de seletividade realizada durante o exercício.
 
 As demais colunas utilizadas nos filtros também foram adicionadas ao índice para permitir que o SQL Server trabalhasse de forma mais eficiente com as condições da consulta.
 
@@ -94,7 +100,7 @@ Essa validação também me permitiu comparar a estrutura de índices existente 
 
 ### Evidência
 
-![Validação dos índices após criação](../images/10-performance-tuning/validacao-indices-novo-indice.png)
+![Validação do novo índice](../images/10-performance-tuning/validacao-indices-novo-indice.png)
 
 A imagem apresenta a **validação dos índices após a criação do novo índice `noclus_Badges_name`**.
 
@@ -116,9 +122,13 @@ Isso representa uma redução de aproximadamente **98,6% na quantidade de págin
 
 A imagem apresenta o **plano de execução após a criação do índice, demonstrando a utilização do Index Seek**.
 
+---
+
 ![Detalhes da execução após o índice](../images/10-performance-tuning/detalhes-execucao-apos-indice.png)
 
 A imagem apresenta os **detalhes da execução da consulta após a criação do índice**.
+
+---
 
 ![Quantidade de páginas lidas após o índice](../images/10-performance-tuning/qtd-paginas-lidas-apos-indice.png)
 
